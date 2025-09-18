@@ -1,18 +1,233 @@
+/* =========================================================
+   🎨 THEME ROOT VARIABLES (Arch Linux Neon)
+   ========================================================= */
 :root {
---color-primary: #1793d1;
---color-secondary: #0f172a;
---color-accent: #1e293b;
---color-bg: #0a0a0a;
---color-text: #f8fafc;
---color-success: #22c55e;
---color-danger: #ef4444;
---color-warning: #eab308;
-};
+  /* Cores principais */
+  --color-primary: #7c4dff;          /* Roxo Arch Linux */
+  --color-primary-hover: #a17bff;    /* Neon hover */
+  --color-secondary: #0f111a;
+  --color-accent: #1c1f2a;
+  --color-bg: #0a0a0a;
+  --color-text: #ffffff;
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--color-secondary); }
-::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #0f6da8; }
-.card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.card-hover:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
-.badge { padding: 0.25rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+  /* Status */
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+  --color-warning: #facc15;
+  --color-info: #7c4dff;
+
+  /* Glow / Neon */
+  --glow-primary: #7c4dffaa;
+  --glow-accent: #1c1f2aaa;
+  --glow-success: #22c55eaa;
+  --glow-danger: #ef4444aa;
+  --glow-warning: #facc15aa;
+  --glow-info: #7c4dffaa;
+
+  /* Backgrounds */
+  --bg-gradient: linear-gradient(135deg, var(--color-secondary), var(--color-accent), #00000033);
+  --bg-gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  --bg-gradient-accent: linear-gradient(135deg, var(--color-info), var(--color-success));
+  --bg-card: color-mix(in srgb, var(--color-accent) 70%, transparent);
+  --bg-card-hover: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-accent) 70%, transparent),
+    color-mix(in srgb, var(--color-primary-hover) 70%, transparent)
+  );
+  --bg-modal: color-mix(in srgb, var(--color-accent) 95%, transparent);
+
+  /* Bordas */
+  --border-color: rgba(255,255,255,0.05);
+  --border-focus: var(--color-primary-hover);
+
+  /* Sombras */
+  --shadow-card: 0 0 12px var(--glow-accent), 0 6px 15px var(--color-accent);
+  --shadow-card-hover: 0 0 20px var(--glow-primary), 0 10px 22px var(--color-secondary);
+  --shadow-button: 0 0 6px var(--glow-primary), 0 3px 10px var(--color-accent);
+  --shadow-button-hover: 0 0 18px var(--glow-primary), 0 6px 16px var(--color-secondary);
+  --shadow-input: 0 0 4px var(--glow-primary)/20;
+  --shadow-input-focus: 0 0 10px var(--glow-primary);
+  --shadow-modal: 0 0 18px var(--glow-primary), 0 10px 20px var(--color-accent);
+
+  /* Text */
+  --text-shadow: 0 0 4px var(--glow-primary), 0 0 8px var(--glow-primary);
+
+  /* Scrollbar */
+  --scrollbar-track: var(--color-secondary);
+  --scrollbar-thumb: var(--color-primary-hover);
+  --scrollbar-thumb-hover: var(--color-primary);
+  
+  /* Fontes */
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+body {
+  background: linear-gradient(to bottom right, #111827, #1f2937, #111827); /* gradiente dark */
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+.card-hover {
+  background: var(--bg-card);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-button);
+  padding: 0.75rem 1rem;
+  background: var(--bg-gradient-primary);
+  color: #fff;
+}
+button:hover {
+  box-shadow: var(--shadow-button-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   INPUTS / SELECTS / TEXTAREA
+   ========================================================= */
+    input, select, textarea {
+    background: var(--color-accent);
+    color: var(--color-text);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    padding: 2rem 1.25rem; /* 2rem vertical, 1.25rem horizontal */
+    text-indent: 0.5rem;
+    width: 250px;
+
+    outline: none;
+    box-shadow: var(--shadow-input);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    line-height: 1.5;
+    }
+    input:focus, select:focus, textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-input-focus);
+    }
+
+    input::placeholder, textarea::placeholder {
+    color: #aaa;
+    opacity: 1;
+    }
+
+/* =========================================================
+   CHECKBOXES / RADIOS
+   ========================================================= */
+input[type="checkbox"], input[type="radio"] {
+  accent-color: var(--color-primary);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* =========================================================
+   LOGIN / REGISTER CARD
+   ========================================================= */
+.login-card {
+  background: var(--bg-card);
+  border-radius: 2rem;
+  box-shadow: var(--shadow-card);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.3s ease;
+}
+.login-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* FORMAS LOGIN/REGISTER */
+#loginForm, #registerForm {
+  display: flex;
+  flex-direction: column;
+}
+#registerForm.hidden, #loginForm.hidden {
+  display: none;
+}
+#loginForm input, #registerForm input {
+  width: 100%;
+}
+#loginForm button, #registerForm button {
+  margin-top: 0.5rem;
+}
+
+/* LINKS LOGIN/REGISTER */
+.login-card p {
+  color: #ccc;
+  font-size: 0.875rem;
+  text-align: center;
+}
+.login-card p span {
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.login-card p span:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #aaa;
+  font-size: 0.875rem;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+   ========================================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login & Registro - Arch Theme</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../css/colosA.css">
+
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)] font-sans">
+
+<div class="flex-1 flex items-center justify-center px-4">
+    <img src="../assets/logo.svg" alt="" srcset="">
+  <div class="w-full max-w-md">
+    <div class="login-card">
+      <h2 class="text-3xl font-bold mb-6 text-center text-white" id="formTitle">Login</h2>
+      
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-4">
+        <div class="input-group">
+            <label for="loginUsername">Usuário</label>
+          <input type="text" id="loginUsername" placeholder=" " required>
+          
+        </div>
+        <div class="input-group">
+            <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder=" " required>
+          
+        </div>
+        <button type="submit">Entrar</button>
+        <p class="text-center mt-2 text-sm">
+          Não tem conta? 
+          <span class="text-purple-400 cursor-pointer" id="showRegister">Registre-se</span>
+        </p>
+      </form>
+
+      <!-- Registro Form -->
+      <form id="registerForm" class="space-y-4 hidden">
+        <div class="input-group">
+            <label for="regUsername">Usuário</label>
+          <input type="text" id="regUsername" placeholder=" " required>
+          
+        </div>
+        <div class="input-group">
+            <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" placeholder=" " required>
+          
+        </div>
+        <div class="input-group">
+            <label for="regPassword">Senha</label>
+          <input type="password" id="regPassword" placeholder=" " required>
+          
+        </div>
+        <button type="submit">Registrar</button>
+        <p class="text-center mt-2 text-sm">
+          Já tem conta? 
+          <span class="text-purple-400 cursor-pointer" id="showLogin">Login</span>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Arch Theme. Todos os direitos reservados.
+</footer>
+
+<script src="../js/auth.js"></script>
+
+</body>
+</html>
