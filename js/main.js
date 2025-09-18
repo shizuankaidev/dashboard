@@ -50,13 +50,13 @@ links.forEach(link => {
       </div>
       <div>
         <h3 class="text-lg font-semibold mb-4 text-white">Navegação</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="dashboard.html" class="hover:text-[var(--color-primary)] transition">📊 Dashboard</a></li>
-          <li><a href="relatorios.html" class="hover:text-[var(--color-primary)] transition">📑 Relatórios</a></li>
-          <li><a href="analytics.html" class="hover:text-[var(--color-primary)] transition">📈 Analytics</a></li>
-          <li><a href="funcionarios.html" class="hover:text-[var(--color-primary)] transition">👥 Usuários</a></li>
-          <li><a href="config.html" class="hover:text-[var(--color-primary)] transition">⚙️ Configurações</a></li>
-        </ul>
+      <ul class="space-y-3">
+        <li><a href="../index.html" class="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-700 transition">📊 Dashboard</a></li>
+        <li><a href="/pages/relatorios.html" class="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-700 transition">📑 Relatórios</a></li>
+        <li><a href="/pages/analytics.html" class="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-700 transition">📈 Analytics</a></li>
+        <li><a href="/pages/funcionarios.html" class="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-700 transition">👥 Usuários</a></li>
+        <li><a href="/pages/config.html" class="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-700 transition">⚙️ Configurações</a></li>
+      </ul>
       </div>
       <div>
         <h3 class="text-lg font-semibold mb-4 text-white">Contato</h3>
