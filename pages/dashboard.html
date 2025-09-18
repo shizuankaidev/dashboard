@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - ReportHub</title>
+  
+  <!-- Tailwind via CDN -->
+  <link rel="stylesheet" href="../css/css_index/dashboard.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/css_index/dashboard.css">
+  <link rel="stylesheet" href="../css/colosA.css">
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)] font-sans">
+
+  <!-- LAYOUT -->
+  <div class="flex h-screen">
+
+    <aside id="sidebar" class="hidden md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
+      <!-- O conteúdo será inserido via JS -->
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
+      <!-- Header -->
+      <header class="flex justify-between items-center mb-6 flex-wrap gap-3">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">Dashboard</h2>
+        <button class="px-4 py-2 bg-[var(--color-primary)] hover:bg-blue-700 rounded-xl shadow hover:shadow-lg transition">
+          Download Relatório
+        </button>
+      </header>
+
+      <!-- KPIs -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <h3 class="text-sm text-gray-400">Total de Relatórios</h3>
+          <p class="text-3xl font-bold">2,847</p>
+          <span class="text-green-400 text-sm">+12.5% vs mês anterior</span>
+        </div>
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <h3 class="text-sm text-gray-400">Usuários Ativos</h3>
+          <p class="text-3xl font-bold">1,245</p>
+          <span class="text-green-400 text-sm">+8.2% vs mês anterior</span>
+        </div>
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <h3 class="text-sm text-gray-400">Downloads Hoje</h3>
+          <p class="text-3xl font-bold">342</p>
+          <span class="text-green-400 text-sm">+23.1% vs mês anterior</span>
+        </div>
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <h3 class="text-sm text-gray-400">Performance</h3>
+          <p class="text-3xl font-bold">98.5%</p>
+          <span class="text-red-400 text-sm">-0.3% vs mês anterior</span>
+        </div>
+      </section>
+
+      <!-- Gráficos -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 class="text-lg font-semibold mb-4">Vendas vs Meta</h3>
+          <canvas id="salesChart"></canvas>
+        </div>
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 class="text-lg font-semibold mb-4">Distribuição por Departamento</h3>
+          <canvas id="deptChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Atividade e Resumo -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <!-- Atividade -->
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">🔔 Atividade Recente</h3>
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-start justify-between border-b border-gray-700 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 flex items-center justify-center bg-blue-500/20 text-blue-400 rounded-full">📄</span>
+                <span>João Silva gerou relatório de vendas</span>
+              </div>
+              <span class="text-gray-400 text-xs">2 min atrás</span>
+            </li>
+            <li class="flex items-start justify-between border-b border-gray-700 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 flex items-center justify-center bg-green-500/20 text-green-400 rounded-full">⬇️</span>
+                <span>Maria Santos baixou relatório financeiro</span>
+              </div>
+              <span class="text-gray-400 text-xs">5 min atrás</span>
+            </li>
+            <li class="flex items-start justify-between border-b border-gray-700 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 flex items-center justify-center bg-yellow-500/20 text-yellow-400 rounded-full">📊</span>
+                <span>Pedro Costa acessou dashboard</span>
+              </div>
+              <span class="text-gray-400 text-xs">8 min atrás</span>
+            </li>
+            <li class="flex items-start justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 flex items-center justify-center bg-purple-500/20 text-purple-400 rounded-full">👤</span>
+                <span>Ana Oliveira criou novo usuário</span>
+              </div>
+              <span class="text-gray-400 text-xs">15 min atrás</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Resumo -->
+        <div class="p-6 bg-[var(--color-accent)] rounded-2xl shadow-md hover:shadow-xl transition">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">📌 Resumo do Dia</h3>
+          <div class="grid grid-cols-2 gap-4 text-center">
+            <div class="p-4 bg-gray-800/50 rounded-xl">
+              <p class="text-2xl font-bold text-[var(--color-primary)]">25</p>
+              <p class="text-sm text-gray-400">Relatórios gerados</p>
+            </div>
+            <div class="p-4 bg-gray-800/50 rounded-xl">
+              <p class="text-2xl font-bold text-green-400">17</p>
+              <p class="text-sm text-gray-400">Downloads</p>
+            </div>
+            <div class="p-4 bg-gray-800/50 rounded-xl">
+              <p class="text-2xl font-bold text-yellow-400">8</p>
+              <p class="text-sm text-gray-400">Acessos</p>
+            </div>
+            <div class="p-4 bg-gray-800/50 rounded-xl">
+              <p class="text-2xl font-bold text-purple-400">3</p>
+              <p class="text-sm text-gray-400">Novos usuários</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-10 bg-[var(--color-secondary)] text-gray-300 py-10 border-t border-gray-700"></footer>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

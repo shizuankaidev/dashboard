@@ -1,0 +1,29 @@
+/* ===================== HOVER CARDS ===================== */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================== BADGES ===================== */
+.badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+}
+
+/* ===================== MODAL ANIMATION ===================== */
+.modal-enter {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.4s ease-out;
+}
+.modal-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+}
