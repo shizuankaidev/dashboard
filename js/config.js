@@ -1,11 +1,11 @@
 // ======================= CONFIGURAÇÕES MOCADAS =======================
 let appConfig = {
   empresa: {
-    nome: "ReportHub Inc.",
+    nome: "@python-MeuSite Inc.",
     id: "12.345.678/0001-99",
     endereco: "Rua Fictícia, 123 - São Paulo",
     telefone: "(11) 98765-4321",
-    email: "contato@reporthub.com",
+    email: "contato@@python-MeuSite.com",
     logo: "../assets/logo.svg"
   },
   identidade: {
@@ -24,7 +24,7 @@ let appConfig = {
     notificacoes: { email: true, push: false, sms: true }
   },
   api: {
-    url: "https://api.reporthub.com/v1",
+    url: "https://api.@python-MeuSite.com/v1",
     key: "API_KEY_123456"
   },
   integracoes: {
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderFooter() {
   const footer = document.querySelector("footer");
   footer.innerHTML = `
-    <p class="text-sm">© ${new Date().getFullYear()} ReportHub. Todos os direitos reservados.</p>
+    <p class="text-sm">© ${new Date().getFullYear()} @python-MeuSite. Todos os direitos reservados.</p>
     <p class="text-xs opacity-70">Versão 1.0.0</p>
   `;
 }

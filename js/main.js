@@ -4,7 +4,7 @@ window.onload = () => {
   sidebar.innerHTML = `
     <div class="px-6 py-6 flex items-center gap-2 border-b border-gray-700">
       <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center font-bold text-xl">RH</div>
-      <h1 class="text-xl font-semibold">ReportHub</h1>
+      <h1 class="text-xl font-semibold">@python-MeuSite</h1>
     </div>
     <nav class="flex-1 px-4 py-6">
       <ul class="space-y-3">
@@ -44,7 +44,7 @@ links.forEach(link => {
       <div>
         <div class="flex items-center gap-2 mb-4">
           <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center font-bold text-xl">RH</div>
-          <h2 class="text-xl font-semibold text-white">ReportHub</h2>
+          <h2 class="text-xl font-semibold text-white">@python-MeuSite</h2>
         </div>
         <p class="text-sm text-gray-400">Plataforma inteligente para relatórios e análises de desempenho.</p>
       </div>
@@ -62,7 +62,7 @@ links.forEach(link => {
         <h3 class="text-lg font-semibold mb-4 text-white">Contato</h3>
         <ul class="space-y-3 text-sm">
           <li>📍 São Paulo - Brasil</li>
-          <li>📧 suporte@reporthub.com</li>
+          <li>📧 suporte@@python-MeuSite.com</li>
           <li>📞 +55 (11) 99999-9999</li>
         </ul>
       </div>
@@ -76,7 +76,7 @@ links.forEach(link => {
       </div>
     </div>
     <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-      © 2025 ReportHub. Todos os direitos reservados.
+      © 2025 @python-MeuSite. Todos os direitos reservados.
     </div>
   `;
   document.body.appendChild(footer);
