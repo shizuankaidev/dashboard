@@ -2,11 +2,12 @@
    🎨 THEME ROOT VARIABLES
    ========================================================= */
 :root {
-  --color-primary: #7c4dff;
-  --color-primary-hover: #a17bff;
-  --color-secondary: #0f111a;
+--color-primary: #7c4dff;
+ --color-primary-hover: #a17bff;
+ --color-secondary: #0f111a;
   --color-accent: #1c1f2a;
-  --color-bg: #4e309941;
+  --color-bg: #7c4dff;
+  --color-bg2: #a17bff;
   --color-text: #ffffff;
 
   --color-success: #22c55e;
@@ -21,7 +22,9 @@
   --glow-warning: #facc15aa;
   --glow-info: #7c4dffaa;
 
-  --bg-gradient: linear-gradient(135deg, var(--color-secondary), var(--color-accent), #00000033);
+  --bg-main: linear-gradient(135deg, var(--color-bg), var(--color-bg2));
+
+  --bg-gradient: linear-gradient(135deg, var(--color-secondary), var(--color-accent), #000000);
   --bg-gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   --bg-gradient-accent: linear-gradient(135deg, var(--color-primary-hover), var(--color-primary));
   --bg-card: color-mix(in srgb, var(--color-accent) 70%, transparent);
@@ -57,7 +60,7 @@
    BASE
    ========================================================= */
 body {
-  background: var(--bg-gradient-accent);
+  background: var(--bg-main);
   color: var(--color-text);
   font-family: var(--font-sans);
   min-height: 100vh;
