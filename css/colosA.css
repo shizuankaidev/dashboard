@@ -2,12 +2,12 @@
    🎨 THEME ROOT VARIABLES
    ========================================================= */
 :root {
---color-primary: #7c4dff;
- --color-primary-hover: #a17bff;
- --color-secondary: #0f111a;
+  --color-primary: #7c4dff;
+  --color-primary-hover: #a17bff;
+  --color-secondary: #0f111a;
   --color-accent: #1c1f2a;
-  --color-bg: #7c4dff;
-  --color-bg2: #a17bff;
+  --color-bg: #1c1f2a;
+  --color-bg2: #7c4dff;
   --color-text: #ffffff;
 
   --color-success: #22c55e;
@@ -23,19 +23,13 @@
   --glow-info: #7c4dffaa;
 
   --bg-main: linear-gradient(135deg, var(--color-bg), var(--color-bg2));
-
-  --bg-gradient: linear-gradient(135deg, var(--color-secondary), var(--color-accent), #000000);
   --bg-gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   --bg-gradient-accent: linear-gradient(135deg, var(--color-primary-hover), var(--color-primary));
-  --bg-card: color-mix(in srgb, var(--color-accent) 70%, transparent);
-  --bg-card-hover: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--color-accent) 70%, transparent),
-    color-mix(in srgb, var(--color-primary-hover) 70%, transparent)
-  );
-  --bg-modal: color-mix(in srgb, var(--color-accent) 95%, transparent);
+  --bg-card: rgba(28, 31, 42, 0.8);
+  --bg-card-hover: rgba(124, 77, 255, 0.15);
+  --bg-modal: rgba(28, 31, 42, 0.95);
 
-  --border-color: rgba(255,255,255,0.05);
+  --border-color: rgba(255,255,255,0.1);
   --border-focus: var(--color-primary-hover);
 
   --shadow-card: 0 0 12px var(--glow-accent), 0 6px 15px var(--color-accent);
@@ -78,124 +72,6 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
 /* =========================================================
-   SIDEBAR
-   ========================================================= */
-#sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 16rem;
-  height: 100vh;
-  background: var(--color-secondary);
-  overflow-y: auto;
-  transition: transform 0.3s ease;
-  transform: translateX(-100%);
-  z-index: 9999; /* Sempre acima de tudo */
-}
-
-#sidebar.show { 
-  transform: translateX(0); 
-}
-
-/* Sidebar overlay para mobile */
-#sidebar-overlay {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  z-index: 9998; /* Abaixo do sidebar, acima do conteúdo */
-}
-
-/* Sidebar Header */
-#sidebar .sidebar-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 1.5rem; 
-  border-bottom: 1px solid rgba(255,255,255,0.1); 
-}
-
-#sidebar .sidebar-header .flex { 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem; 
-  min-width: 0;
-}
-
-#sidebar .sidebar-header .user-logo { 
-  width: 2.5rem; 
-  height: 2.5rem; 
-  border-radius: 9999px; 
-  background: var(--color-primary); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-weight: bold; 
-  font-size: 1.25rem; 
-  color: white; 
-  box-shadow: var(--shadow-card);
-}
-
-#sidebar .sidebar-header h1 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: calc(100% - 3.5rem);
-}
-
-#sidebar nav ul li a { 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem; 
-  padding: 0.5rem; 
-  border-radius: 1rem; 
-  transition: all 0.2s; 
-  color: #ccc; 
-  text-decoration: none; 
-}
-
-#sidebar nav ul li a:hover { 
-  background: rgba(255,255,255,0.05); 
-}
-
-#sidebar nav ul li a.active { 
-  background: var(--color-primary); 
-  color: white; 
-  box-shadow: var(--shadow-card); 
-}
-
-/* =========================================================
-   USER MENU
-   ========================================================= */
-#userMenu { cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
-#userMenu .user-initials {
-  width: 2.5rem; height: 2.5rem; border-radius: 9999px;
-  background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center;
-  font-weight: bold; box-shadow: var(--shadow-card);
-}
-#userDropdown {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 0.5rem;
-  width: 14rem;
-  background: var(--color-accent);
-  border-radius: 1.5rem;
-  box-shadow: var(--shadow-card);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 9999; 
-}
-#userDropdown.show { display: flex; }
-#userDropdown ul li a { display: flex; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 1rem; transition: all 0.2s; color: white; text-decoration: none; }
-#userDropdown ul li a:hover { background: var(--bg-gradient-primary); }
-
-/* =========================================================
    CARDS
    ========================================================= */
 .card-hover {
@@ -212,10 +88,10 @@ body {
 /* =========================================================
    BUTTONS
    ========================================================= */
-button {
+button, .action-btn {
   cursor: pointer;
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-button);
@@ -223,7 +99,7 @@ button {
   background: var(--bg-gradient-primary);
   color: #fff;
 }
-button:hover {
+button:hover, .action-btn:hover {
   box-shadow: var(--shadow-button-hover);
   transform: translateY(-2px);
 }
@@ -236,113 +112,253 @@ input, select, textarea {
   color: var(--color-text);
   border: 1px solid var(--border-color);
   border-radius: 1.25rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem;
   outline: none;
   box-shadow: var(--shadow-input);
   margin-bottom: 1rem;
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
-input:focus, select:focus, textarea:focus { border-color: var(--border-focus); box-shadow: var(--shadow-input-focus); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-input-focus);
+}
 input::placeholder, textarea::placeholder { color: #aaa; opacity: 1; }
+
+/* RANGE SLIDERS */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  transition: all 0.3s;
+}
+input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.2); }
 
 /* =========================================================
    CHECKBOXES / RADIOS
    ========================================================= */
 input[type="checkbox"], input[type="radio"] {
   accent-color: var(--color-primary);
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
 }
 
 /* =========================================================
-   CHARTS
+   TABLES
    ========================================================= */
-#salesChart, #deptChart { height: 300px; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: var(--color-text);
+}
+table th, table td {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.75rem 1rem;
+}
+table th { background: var(--color-secondary); }
+table tr:hover { background: rgba(124,77,255,0.1); }
 
 /* =========================================================
    FOOTER
    ========================================================= */
-footer { text-align: center; padding: 1.5rem; color: #aaa; font-size: 0.875rem; }
+footer {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.875rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
 
 /* =========================================================
    ANIMAÇÕES
    ========================================================= */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-
 /* =========================================================
-   LOGIN CARD
+   GERAL / UTILIDADES
    ========================================================= */
-.login-card {
-  background: var(--bg-card);
-  border-radius: 1.5rem;
-  box-shadow: var(--shadow-card);
-  padding: 2rem;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.login-card h2 {
-  text-shadow: var(--text-shadow);
-}
-
-.login-card form .input-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-card form .input-group label {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  color: #bbb;
-}
-
-.login-card form input {
+.input-field {
   width: 100%;
-  background: var(--color-accent);
-  border: 1px solid var(--border-color);
   border-radius: 1rem;
   padding: 0.75rem 1rem;
+  background-color: var(--color-accent);
   color: var(--color-text);
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-input);
-  transition: all 0.3s;
-}
-
-.login-card form input:focus {
-  border-color: var(--border-focus);
-  box-shadow: var(--shadow-input-focus);
-}
-
-/* Botão principal do formulário */
-.login-card form button {
-  width: 100%;
-  border-radius: 1rem;
-  padding: 0.75rem;
-  background: var(--bg-gradient-primary);
-  color: #fff;
-  font-weight: 600;
-  box-shadow: var(--shadow-button);
   transition: all 0.3s ease;
 }
+.input-field:focus { border-color: var(--border-focus); box-shadow: var(--shadow-input-focus); }
 
-.login-card form button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-button-hover);
+.action-btn { 
+  background: var(--bg-gradient-primary); 
+  color: #fff; 
+  font-weight: 600; 
+  box-shadow: var(--shadow-button); 
+  border-radius: 1rem; 
+  padding: 0.75rem 1rem; 
+  transition: all 0.3s ease; 
+}
+.action-btn:hover { 
+  box-shadow: var(--shadow-button-hover); 
+  transform: translateY(-2px); 
 }
 
-/* Links abaixo dos formulários */
-.login-card p {
-  color: #aaa;
+
+
+
+
+
+
+
+
+/* =========================================================
+   HEADER FIXO
+   ========================================================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: var(--color-secondary);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.login-card p span {
-  color: var(--color-primary-hover);
+header h2 {
+  color: var(--color-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+#sidebar {
+  background: var(--color-secondary);
+  width: 16rem;
+  min-height: 100vh;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+  z-index: 998;
+}
+#sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+#sidebar nav ul li {
+  margin-bottom: 1rem;
+}
+#sidebar nav ul li a {
+  color: #ccc;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  transition: all 0.2s ease;
+}
+#sidebar nav ul li a.active,
+#sidebar nav ul li a:hover {
+  color: white;
+  background: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================================
+   DROPDOWNS / MENUS
+   ========================================================= */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: var(--color-accent);
+  min-width: 12rem;
+  box-shadow: var(--shadow-card);
+  border-radius: 1rem;
+  overflow: hidden;
+  z-index: 9999;
+  flex-direction: column;
+}
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+.dropdown-content a {
+  padding: 0.5rem 1rem;
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.dropdown-content a:hover {
+  background: var(--bg-gradient-primary);
+}
+
+/* =========================================================
+   BADGES / LABELS
+   ========================================================= */
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
   font-weight: 600;
+  display: inline-block;
 }
-.login-card p span:hover {
-  text-decoration: underline;
+.badge-success { background: var(--color-success); color: #fff; }
+.badge-danger { background: var(--color-danger); color: #fff; }
+.badge-warning { background: var(--color-warning); color: #000; }
+.badge-info { background: var(--color-info); color: #fff; }
+
+/* =========================================================
+   TOOLTIP
+   ========================================================= */
+.tooltip {
+  position: relative;
   cursor: pointer;
 }
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-card);
+  font-size: 0.75rem;
+  opacity: 0.95;
+}
 
-/* === POPUP MODAL === */
+/* =========================================================
+   MODALS / POPUPS
+   ========================================================= */
 .popup-overlay {
   position: fixed;
   inset: 0;
@@ -353,7 +369,6 @@ footer { text-align: center; padding: 1.5rem; color: #aaa; font-size: 0.875rem; 
   align-items: center;
   z-index: 10000;
 }
-
 .popup-card {
   background: var(--bg-modal);
   border-radius: 1.5rem;
@@ -364,15 +379,57 @@ footer { text-align: center; padding: 1.5rem; color: #aaa; font-size: 0.875rem; 
   text-align: center;
   animation: fadeIn 0.3s ease-out;
 }
-
 .popup-card button {
   margin-top: 1rem;
   background: var(--bg-gradient-primary);
   box-shadow: var(--shadow-button);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
-
 .popup-card button:hover {
   box-shadow: var(--shadow-button-hover);
   transform: translateY(-2px);
+}
+
+/* =========================================================
+   CARDS / STAT BOXES
+   ========================================================= */
+.stat-box {
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+.stat-box:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   TOOLBAR / FILTERS
+   ========================================================= */
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.toolbar button {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background: var(--bg-gradient-accent);
+  color: white;
+  box-shadow: var(--shadow-button);
+}
+.toolbar button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button-hover);
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 1024px) {
+  #sidebar { transform: translateX(-100%); position: fixed; z-index: 999; }
+  #sidebar.show { transform: translateX(0); }
 }

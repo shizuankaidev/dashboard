@@ -54,8 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ======================= UI RENDER =======================
-
-
 function renderFooter() {
   const footer = document.querySelector("footer");
   footer.innerHTML = `
@@ -66,21 +64,20 @@ function renderFooter() {
 
 function carregarConfigNaUI() {
   // Empresa
-  document.getElementById("companyName").value = appConfig.empresa.nome;
-  document.getElementById("companyId").value = appConfig.empresa.id;
-  document.getElementById("companyAddress").value = appConfig.empresa.endereco;
-  document.getElementById("companyPhone").value = appConfig.empresa.telefone;
-  document.getElementById("companyEmail").value = appConfig.empresa.email;
-
-  // Preview da logo
-  const logoPreview = document.getElementById("logoPreview");
-  logoPreview.src = appConfig.empresa.logo;
+  const empresa = appConfig.empresa;
+  document.getElementById("companyName").value = empresa.nome;
+  document.getElementById("companyId").value = empresa.id;
+  document.getElementById("companyAddress").value = empresa.endereco;
+  document.getElementById("companyPhone").value = empresa.telefone;
+  document.getElementById("companyEmail").value = empresa.email;
+  document.getElementById("logoPreview").src = empresa.logo;
 
   // Identidade Visual
-  Object.keys(appConfig.identidade).forEach(key => {
+  Object.entries(appConfig.identidade).forEach(([key, value]) => {
     const input = document.getElementById(key + "Color");
-    if(input) input.value = appConfig.identidade[key];
+    if(input) input.value = value;
   });
+  aplicarIdentidadeVisual();
 
   // Preferências
   document.getElementById("themeSelect").value = appConfig.preferencias.tema;
@@ -108,28 +105,27 @@ function carregarConfigNaUI() {
 
 function renderEmployees() {
   const tbody = document.getElementById("employeeTable");
-  tbody.innerHTML = "";
-  appConfig.equipe.forEach((emp, index) => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${emp.nome}</td>
-        <td>${emp.email}</td>
-        <td>${emp.cargo}</td>
-        <td>
-          <button onclick="removerFuncionario(${index})" class="text-red-400 hover:text-red-600 transition">🗑️</button>
-        </td>
-      </tr>
-    `;
-  });
+  tbody.innerHTML = appConfig.equipe.map((emp, index) => `
+    <tr>
+      <td>${emp.nome}</td>
+      <td>${emp.email}</td>
+      <td>${emp.cargo}</td>
+      <td>
+        <button onclick="removerFuncionario(${index})" class="text-red-400 hover:text-red-600 transition">🗑️</button>
+      </td>
+    </tr>
+  `).join("");
 }
 
 // ======================= EVENTOS =======================
 function bindEvents() {
   // Botões principais
-  document.getElementById("saveSettingsBtn").addEventListener("click", salvarConfig);
-  document.getElementById("exportConfigBtn").addEventListener("click", exportarConfig);
-  document.getElementById("importConfigBtn").addEventListener("click", importarConfig);
-  document.getElementById("resetConfigBtn").addEventListener("click", resetarConfig);
+  ["saveSettingsBtn","exportConfigBtn","importConfigBtn","resetConfigBtn"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el){
+      el.addEventListener("click", () => window[id]?.());
+    }
+  });
 
   // API & Integrações
   document.getElementById("regenApiKeyBtn").addEventListener("click", regenerarApiKey);
@@ -140,79 +136,93 @@ function bindEvents() {
 
   // Logo Preview
   const logoInput = document.getElementById("companyLogo");
-  const logoPreview = document.getElementById("logoPreview");
   logoInput.addEventListener("change", e => {
     const file = e.target.files[0];
-    if(file) {
+    if(file){
       const reader = new FileReader();
       reader.onload = () => { 
-        logoPreview.src = reader.result;
+        document.getElementById("logoPreview").src = reader.result;
         appConfig.empresa.logo = reader.result;
       };
       reader.readAsDataURL(file);
     }
   });
 
-  // Inputs de cor
-  const root = document.documentElement;
+  // Identidade Visual
   const colorInputs = document.querySelectorAll('input[type="color"]');
+  colorInputs.forEach(input => input.addEventListener("input", aplicarIdentidadeVisual));
+}
 
-  function addAlpha(hex, alpha){
-    const r = parseInt(hex.substr(1,2),16);
-    const g = parseInt(hex.substr(3,2),16);
-    const b = parseInt(hex.substr(5,2),16);
-    return `rgba(${r},${g},${b},${alpha})`;
-  }
+// ======================= IDENTIDADE VISUAL =======================
+function aplicarIdentidadeVisual() {
+  const root = document.documentElement;
+  const identidade = appConfig.identidade;
 
-  function lighten(hex, amount){
-    const num = parseInt(hex.slice(1),16);
-    let r = (num >> 16) + amount;
-    let g = ((num >> 8) & 0x00FF) + amount;
-    let b = (num & 0x0000FF) + amount;
-    r = Math.min(255,r); g = Math.min(255,g); b = Math.min(255,b);
-    return `rgb(${r},${g},${b})`;
-  }
-
-  function applyColors(){
-    colorInputs.forEach(input=>{
-      const key = input.id.replace("Color","");
+  Object.keys(identidade).forEach(key => {
+    const input = document.getElementById(key + "Color");
+    if(input){
+      identidade[key] = input.value;
       root.style.setProperty(`--color-${key}`, input.value);
-      root.style.setProperty(`--glow-${key}`, addAlpha(input.value,0.67));
-      if(key==="primary") root.style.setProperty(`--color-primary-hover`, lighten(input.value,30));
-    });
-  }
+      root.style.setProperty(`--glow-${key}`, hexToRgba(input.value, 0.67));
+    }
+  });
 
-  colorInputs.forEach(input => input.addEventListener("input", applyColors));
-  applyColors();
+  // Criar cor hover automaticamente para primary
+  root.style.setProperty("--color-primary-hover", lightenColor(identidade.primary, 30));
+
+  // Atualizar variáveis de cards e sombras
+  root.style.setProperty("--bg-card", `color-mix(in srgb, ${identidade.accent} 90%, transparent)`);
+  root.style.setProperty("--shadow-card", `0 0 12px ${hexToRgba(identidade.accent,0.67)},0 6px 15px ${identidade.accent}`);
+}
+
+function hexToRgba(hex, alpha){
+  const r = parseInt(hex.substr(1,2),16);
+  const g = parseInt(hex.substr(3,2),16);
+  const b = parseInt(hex.substr(5,2),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function lightenColor(hex, amount){
+  const num = parseInt(hex.slice(1),16);
+  let r = (num >> 16) + amount;
+  let g = ((num >> 8) & 0x00FF) + amount;
+  let b = (num & 0x0000FF) + amount;
+  r = Math.min(255,r); g = Math.min(255,g); b = Math.min(255,b);
+  return `rgb(${r},${g},${b})`;
 }
 
 // ======================= AÇÕES =======================
 function salvarConfig() {
-  appConfig.empresa = {
-    nome: document.getElementById("companyName").value,
-    id: document.getElementById("companyId").value,
-    endereco: document.getElementById("companyAddress").value,
-    telefone: document.getElementById("companyPhone").value,
-    email: document.getElementById("companyEmail").value,
-    logo: appConfig.empresa.logo
-  };
-  Object.keys(appConfig.identidade).forEach(key=>{
-    const input = document.getElementById(key+"Color");
-    if(input) appConfig.identidade[key] = input.value;
+  // Empresa
+  const empresa = document.getElementById("companyName");
+  appConfig.empresa.nome = empresa.value;
+  appConfig.empresa.id = document.getElementById("companyId").value;
+  appConfig.empresa.endereco = document.getElementById("companyAddress").value;
+  appConfig.empresa.telefone = document.getElementById("companyPhone").value;
+  appConfig.empresa.email = document.getElementById("companyEmail").value;
+
+  // Identidade Visual
+  document.querySelectorAll('input[type="color"]').forEach(input => {
+    const key = input.id.replace("Color","");
+    appConfig.identidade[key] = input.value;
   });
-  appConfig.preferencias = {
-    tema: document.getElementById("themeSelect").value,
-    idioma: document.getElementById("userLanguage").value,
-    data: document.getElementById("dateFormat").value,
-    notificacoes:{
-      email: document.getElementById("notifyEmail").checked,
-      push: document.getElementById("notifyPush").checked,
-      sms: document.getElementById("notifySms").checked
-    }
-  };
+
+  // Preferências
+  appConfig.preferencias.tema = document.getElementById("themeSelect").value;
+  appConfig.preferencias.idioma = document.getElementById("userLanguage").value;
+  appConfig.preferencias.data = document.getElementById("dateFormat").value;
+  appConfig.preferencias.notificacoes.email = document.getElementById("notifyEmail").checked;
+  appConfig.preferencias.notificacoes.push = document.getElementById("notifyPush").checked;
+  appConfig.preferencias.notificacoes.sms = document.getElementById("notifySms").checked;
+
+  // API
   appConfig.api.url = document.getElementById("apiUrl").value;
   appConfig.api.key = document.getElementById("apiKey").value;
+
+  // Integrações
   appConfig.integracoes.webhook = document.getElementById("webhookUrl").value;
+
+  // Privacidade & Segurança
   appConfig.privacidade.gdpr = document.getElementById("gdprCompliance").checked;
   appConfig.privacidade.anonymize = document.getElementById("anonymizeLogs").checked;
   appConfig.seguranca.sessionTimeout = parseInt(document.getElementById("sessionTimeout").value);
@@ -226,21 +236,21 @@ function exportarConfig() {
   const blob = new Blob([JSON.stringify(appConfig,null,2)],{type:"application/json"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href=url;
-  a.download="config.json";
+  a.href = url;
+  a.download = "config.json";
   a.click();
   URL.revokeObjectURL(url);
 }
 
 function importarConfig() {
   const input = document.createElement("input");
-  input.type="file";
-  input.accept="application/json";
+  input.type = "file";
+  input.accept = "application/json";
   input.onchange = e => {
     const file = e.target.files[0];
     if(!file) return;
     const reader = new FileReader();
-    reader.onload = evt=>{
+    reader.onload = evt => {
       try{
         appConfig = JSON.parse(evt.target.result);
         carregarConfigNaUI();
@@ -266,7 +276,6 @@ function regenerarApiKey() {
 
 function testarWebhook() {
   alert("📡 Testando webhook em: " + appConfig.integracoes.webhook);
-  // Futuro: fetch(appConfig.integracoes.webhook, { method: "POST", body: JSON.stringify({ test: true }) })
 }
 
 function adicionarFuncionario() {
@@ -285,5 +294,3 @@ function removerFuncionario(index){
     renderEmployees();
   }
 }
-
-
