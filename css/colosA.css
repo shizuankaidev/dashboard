@@ -7,7 +7,7 @@
   --color-primary-hover: #a17bff;
   --color-secondary: #0f111a;
   --color-accent: #1c1f2a;
-  --color-bg: #0a0a0a;
+  --color-bg: #4e309941;
   --color-text: #ffffff;
 
   /* Status */
@@ -27,7 +27,7 @@
   /* Backgrounds */
   --bg-gradient: linear-gradient(135deg, var(--color-secondary), var(--color-accent), #00000033);
   --bg-gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
-  --bg-gradient-accent: linear-gradient(135deg, var(--color-info), var(--color-success));
+  --bg-gradient-accent: linear-gradient(135deg, var(--color-primary-hover), var(--color-primary));
   --bg-card: color-mix(in srgb, var(--color-accent) 70%, transparent);
   --bg-card-hover: linear-gradient(
     135deg,
@@ -66,7 +66,7 @@
    BASE
    ========================================================= */
 body {
-  background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+  background: var(--bg-gradient-accent);
   color: var(--color-text);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -263,3 +263,5 @@ footer { text-align: center; padding: 1.5rem; color: #aaa; font-size: 0.875rem; 
    ANIMAÇÕES
    ========================================================= */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+
