@@ -3,16 +3,30 @@ window.addEventListener("DOMContentLoaded", () => {
   function initSidebar() {
     const sidebar = document.getElementById("sidebar");
 
-    // Conteúdo da sidebar
+    // Sidebar overlay (posição fixa e z-index alto)
+    Object.assign(sidebar.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      height: "100vh",
+      width: "20rem", // w-64
+      transform: "translateX(-100%)", // escondida inicialmente
+      transition: "transform 0.3s ease",
+      zIndex: "9999",
+      backgroundColor: "var(--color-secondary)",
+      backdropFilter: "blur(10px)",
+      overflowY: "auto"
+    });
+
     sidebar.innerHTML = `
-      <div class="sidebar-header">
+      <div class="sidebar-header flex items-center justify-between p-4 border-b border-gray-700">
         <div class="flex items-center gap-2">
           <div class="user-logo">RH</div>
           <h1 class="text-xl font-semibold">@python-MeuSite</h1>
         </div>
-        <button id="closeSidebarBtn" class="close-sidebar text-white rounded-md px-2 py-1 transition-colors duration-200 hover:opacity-80">✖</button>
+        <button id="closeSidebarBtn" class="close-sidebar text-white rounded-md px-2 py-1 hover:opacity-80">✖</button>
       </div>
-      <nav class="flex-1 px-4 py-6">
+      <nav class="flex-1 px-4 py-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
         <ul class="space-y-3">
           <li><a href="../index.html">📊 Dashboard</a></li>
           <li><a href="/pages/relatorios.html">📑 Relatórios</a></li>
@@ -23,11 +37,9 @@ window.addEventListener("DOMContentLoaded", () => {
       </nav>
     `;
 
+
     const closeBtn = document.getElementById("closeSidebarBtn");
     closeBtn.style.backgroundColor = "var(--color-primary)";
-
-    // Sidebar sempre visível no desktop
-    if (window.innerWidth >= 768) sidebar.classList.add("show");
 
     // Links ativos
     const currentPage = window.location.pathname.split("/").pop().replace(".html", "").toLowerCase();
@@ -42,20 +54,27 @@ window.addEventListener("DOMContentLoaded", () => {
     if (oldToggle) oldToggle.remove();
 
     const toggleBtn = document.createElement("button");
-    toggleBtn.className = "toggle-sidebar  text-white rounded-md px-2 py-1 transition-colors duration-200 hover:opacity-80";
+    toggleBtn.className = "toggle-sidebar text-white rounded-md px-2 py-1 hover:opacity-80";
     toggleBtn.textContent = "☰";
     toggleBtn.style.backgroundColor = "var(--color-primary)";
     menuContainer.appendChild(toggleBtn);
 
-    toggleBtn.addEventListener("click", () => sidebar.classList.toggle("show"));
-    closeBtn.addEventListener("click", () => sidebar.classList.remove("show"));
-
-    // Atualiza sidebar ao redimensionar
-    window.addEventListener("resize", () => {
-      if (window.innerWidth >= 768) sidebar.classList.add("show");
-      else sidebar.classList.remove("show");
+    toggleBtn.addEventListener("click", () => {
+      sidebar.style.transform = sidebar.style.transform === "translateX(0px)" ? "translateX(-100%)" : "translateX(0)";
     });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.style.transform = "translateX(-100%)";
+    });
+
+    // Desktop sempre visível
+    const handleResize = () => {
+      if (window.innerWidth >= 768) sidebar.style.transform = "translateX(0)";
+      else sidebar.style.transform = "translateX(-100%)";
+    };
+    window.addEventListener("resize", handleResize);
   }
+
 
   function initUserMenu() {
     const header = document.querySelector("header");
@@ -63,7 +82,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const userEmail = "pedro.silva@email.com";
     const userInitials = userName.split(" ").map(n => n[0]).join("");
 
-    // Remove menu antigo se existir
     const oldMenu = header.querySelector(".user-menu-container");
     if (oldMenu) oldMenu.remove();
 
@@ -73,15 +91,15 @@ window.addEventListener("DOMContentLoaded", () => {
       <div id="userMenu" class="user-menu flex items-center gap-2 cursor-pointer select-none">
         <div class="user-initials">${userInitials}</div>
       </div>
-      <div id="userDropdown" class="user-dropdown hidden">
-        <div class="px-4 py-3 border-b">
+      <div id="userDropdown" class="user-dropdown hidden absolute right-0 mt-2 w-48 bg-[var(--color-accent)] rounded-lg shadow-lg z-50">
+        <div class="px-4 py-3 border-b border-gray-700">
           <p class="font-semibold text-white">${userName}</p>
           <p class="text-gray-400 text-sm">${userEmail}</p>
         </div>
         <ul class="flex flex-col">
-          <li><a href="perfil.html">👤 Perfil</a></li>
-          <li><a href="config.html">⚙️ Configurações</a></li>
-          <li><a href="pages/login.html">🚪 Sair</a></li>
+          <li><a href="perfil.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">👤 Perfil</a></li>
+          <li><a href="config.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">⚙️ Configurações</a></li>
+          <li><a href="pages/login.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">🚪 Sair</a></li>
         </ul>
       </div>
     `;
@@ -96,7 +114,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Inicializa sidebar e menu do usuário
   initSidebar();
   initUserMenu();
 });

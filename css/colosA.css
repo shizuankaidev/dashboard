@@ -1,8 +1,7 @@
 /* =========================================================
-   🎨 THEME ROOT VARIABLES (Arch Linux Neon)
+   🎨 THEME ROOT VARIABLES
    ========================================================= */
 :root {
-  /* Cores principais */
   --color-primary: #7c4dff;
   --color-primary-hover: #a17bff;
   --color-secondary: #0f111a;
@@ -10,13 +9,11 @@
   --color-bg: #4e309941;
   --color-text: #ffffff;
 
-  /* Status */
   --color-success: #22c55e;
   --color-danger: #ef4444;
   --color-warning: #facc15;
   --color-info: #7c4dff;
 
-  /* Glow / Neon */
   --glow-primary: #7c4dffaa;
   --glow-accent: #1c1f2aaa;
   --glow-success: #22c55eaa;
@@ -24,7 +21,6 @@
   --glow-warning: #facc15aa;
   --glow-info: #7c4dffaa;
 
-  /* Backgrounds */
   --bg-gradient: linear-gradient(135deg, var(--color-secondary), var(--color-accent), #00000033);
   --bg-gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   --bg-gradient-accent: linear-gradient(135deg, var(--color-primary-hover), var(--color-primary));
@@ -36,11 +32,9 @@
   );
   --bg-modal: color-mix(in srgb, var(--color-accent) 95%, transparent);
 
-  /* Bordas */
   --border-color: rgba(255,255,255,0.05);
   --border-focus: var(--color-primary-hover);
 
-  /* Sombras */
   --shadow-card: 0 0 12px var(--glow-accent), 0 6px 15px var(--color-accent);
   --shadow-card-hover: 0 0 20px var(--glow-primary), 0 10px 22px var(--color-secondary);
   --shadow-button: 0 0 6px var(--glow-primary), 0 3px 10px var(--color-accent);
@@ -49,15 +43,12 @@
   --shadow-input-focus: 0 0 10px var(--glow-primary);
   --shadow-modal: 0 0 18px var(--glow-primary), 0 10px 20px var(--color-accent);
 
-  /* Text */
   --text-shadow: 0 0 4px var(--glow-primary), 0 0 8px var(--glow-primary);
 
-  /* Scrollbar */
   --scrollbar-track: var(--color-secondary);
   --scrollbar-thumb: var(--color-primary-hover);
   --scrollbar-thumb-hover: var(--color-primary);
-  
-  /* Fontes */
+
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'Fira Code', monospace;
 }
@@ -90,18 +81,33 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 16rem; /* 64 */
+  width: 16rem;
+  height: 100vh;
   background: var(--color-secondary);
   overflow-y: auto;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
   transform: translateX(-100%);
-  z-index: 50;
+  z-index: 9999; /* Sempre acima de tudo */
 }
+
 #sidebar.show { 
   transform: translateX(0); 
 }
 
+/* Sidebar overlay para mobile */
+#sidebar-overlay {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 9998; /* Abaixo do sidebar, acima do conteúdo */
+}
+
+/* Sidebar Header */
 #sidebar .sidebar-header { 
   display: flex; 
   justify-content: space-between; 
@@ -114,7 +120,7 @@ body {
   display: flex; 
   align-items: center; 
   gap: 0.5rem; 
-  min-width: 0; /* permite que o texto encolha sem quebrar layout */
+  min-width: 0;
 }
 
 #sidebar .sidebar-header .user-logo { 
@@ -132,15 +138,32 @@ body {
 }
 
 #sidebar .sidebar-header h1 {
-  white-space: nowrap;       /* impede quebra de linha */
-  overflow: hidden;          /* esconde excesso de texto */
-  text-overflow: ellipsis;   /* adiciona "..." se for muito longo */
-  max-width: calc(100% - 3.5rem); /* ajusta automaticamente com base na logo e gap */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 3.5rem);
 }
 
-#sidebar nav ul li a { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 1rem; transition: all 0.2s; color: #ccc; text-decoration: none; }
-#sidebar nav ul li a:hover { background: rgba(255,255,255,0.05); }
-#sidebar nav ul li a.active { background: var(--color-primary); color: white; box-shadow: var(--shadow-card); }
+#sidebar nav ul li a { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.5rem; 
+  padding: 0.5rem; 
+  border-radius: 1rem; 
+  transition: all 0.2s; 
+  color: #ccc; 
+  text-decoration: none; 
+}
+
+#sidebar nav ul li a:hover { 
+  background: rgba(255,255,255,0.05); 
+}
+
+#sidebar nav ul li a.active { 
+  background: var(--color-primary); 
+  color: white; 
+  box-shadow: var(--shadow-card); 
+}
 
 /* =========================================================
    USER MENU
@@ -163,9 +186,8 @@ body {
   display: none;
   flex-direction: column;
   overflow: hidden;
-  z-index: 9999; /* garante que fique acima de tudo */
+  z-index: 9999; 
 }
-
 #userDropdown.show { display: flex; }
 #userDropdown ul li a { display: flex; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 1rem; transition: all 0.2s; color: white; text-decoration: none; }
 #userDropdown ul li a:hover { background: var(--bg-gradient-primary); }
@@ -229,30 +251,10 @@ input[type="checkbox"], input[type="radio"] {
   height: 1.2rem;
 }
 
-#salesChart, #deptChart {
-  height: 300px; /* ou o que fizer sentido */
-}
-
-
 /* =========================================================
-   LOGIN / REGISTER CARD
+   CHARTS
    ========================================================= */
-.login-card {
-  background: var(--bg-card);
-  border-radius: 2rem;
-  box-shadow: var(--shadow-card);
-  padding: 2rem;
-  max-width: 400px;
-  transition: all 0.3s ease;
-}
-.login-card:hover { box-shadow: var(--shadow-card-hover); }
-#loginForm, #registerForm { display: flex; flex-direction: column; }
-#loginForm.hidden, #registerForm.hidden { display: none; }
-#loginForm input, #registerForm input { width: 100%; }
-#loginForm button, #registerForm button { margin-top: 0.5rem; }
-.login-card p { color: #ccc; font-size: 0.875rem; text-align: center; }
-.login-card p span { color: var(--color-primary); cursor: pointer; transition: all 0.3s ease; }
-.login-card p span:hover { color: var(--color-primary-hover); text-decoration: underline; }
+#salesChart, #deptChart { height: 300px; }
 
 /* =========================================================
    FOOTER
@@ -263,5 +265,3 @@ footer { text-align: center; padding: 1.5rem; color: #aaa; font-size: 0.875rem; 
    ANIMAÇÕES
    ========================================================= */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-

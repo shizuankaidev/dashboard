@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="../css/colosA.css">
 </head>
-<body class=" via-gray-800 to-gray-900 text-[var(--color-text)]">
+<body>
 
 <div class="flex h-screen">
 
@@ -23,7 +23,7 @@
   <!-- Main -->
   <main class="flex-1 p-6 overflow-y-auto">
 
-    <header class="flex items-center mb-6 flex-wrap gap-3">
+    <header class="flex flex-wrap items-center mb-6 gap-3 fixed top-0 left-0 w-full bg-[var(--color-secondary)] z-50 p-4 shadow-lg">
       <div id="MenuContainer" class="relative">
         <!-- O conteúdo será gerado via JS -->
       </div>
@@ -34,7 +34,7 @@
     </header>
 
     <!-- Filtros -->
-    <section class="mb-6 bg-[var(--color-accent)]/80 backdrop-blur-lg p-5 rounded-3xl card-hover">
+    <section class="mb-6 bg-[var(--color-accent)]/80 backdrop-blur-lg p-5 rounded-3xl card-hover" style="margin-top: 100px;">
       <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">🔍 Filtros</h3>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <input type="text" placeholder="Buscar nome..." class="px-4 py-3 rounded-xl w-full bg-gray-900/70 text-white border border-gray-600 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] transition">
