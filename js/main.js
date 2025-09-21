@@ -91,7 +91,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <div id="userMenu" class="user-menu flex items-center gap-2 cursor-pointer select-none">
         <div class="user-initials">${userInitials}</div>
       </div>
-      <div id="userDropdown" class="user-dropdown hidden absolute right-0 mt-2 w-48 bg-[var(--color-accent)] rounded-lg shadow-lg z-50">
+      <div id="userDropdown" class="user-dropdown  absolute right-0 mt-2 w-48 bg-[var(--color-accent)] rounded-lg shadow-lg z-50">
         <div class="px-4 py-3 border-b border-gray-700">
           <p class="font-semibold text-white">${userName}</p>
           <p class="text-gray-400 text-sm">${userEmail}</p>
