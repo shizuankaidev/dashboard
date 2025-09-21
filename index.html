@@ -1,140 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - @python-MeuSite</title>
-  
-  <!-- Tailwind via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <link rel="stylesheet" href="../css/colosA.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - @python-MeuSite</title>
+
+<!-- Tailwind via CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../css/colosA.css">
 </head>
+
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)] font-sans">
 
-  <!-- LAYOUT -->
-  <div class="flex h-screen">
+<!-- LAYOUT -->
+<div class="flex flex-col md:flex-row min-h-screen">
 
-    <aside id="sidebar" class="hidden md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
-      <!-- O conteúdo será inserido via JS -->
-    </aside>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="w-full md:w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col md:flex md:fixed md:h-screen md:z-50">
+    <!-- O conteúdo será inserido via JS -->
+  </aside>
 
-    <!-- Main -->
-    <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
-      <!-- Header -->
-      <header class="flex justify-between items-center mb-6 flex-wrap gap-3">
-        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">Dashboard</h2>
-        <div id="userMenuContainer" class="relative">
-          <!-- O conteúdo será gerado via JS -->
-        </div>
-      </header>
+  <!-- Main -->
+  <main class="flex-1 p-4 sm:p-6 overflow-y-auto md:ml-64">
 
-      <!-- KPIs -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div class="p-6 card-hover">
-          <h3 class="text-sm text-gray-400">Total de Relatórios</h3>
-          <p class="text-3xl font-bold">2,847</p>
-          <span class="text-green-400 text-sm">+12.5% vs mês anterior</span>
-        </div>
-        <div class="p-6 card-hover">
-          <h3 class="text-sm text-gray-400">Usuários Ativos</h3>
-          <p class="text-3xl font-bold">1,245</p>
-          <span class="text-green-400 text-sm">+8.2% vs mês anterior</span>
-        </div>
-        <div class="p-6 card-hover">
-          <h3 class="text-sm text-gray-400">Downloads Hoje</h3>
-          <p class="text-3xl font-bold">342</p>
-          <span class="text-green-400 text-sm">+23.1% vs mês anterior</span>
-        </div>
-        <div class="p-6 card-hover">
-          <h3 class="text-sm text-gray-400">Performance</h3>
-          <p class="text-3xl font-bold">98.5%</p>
-          <span class="text-red-400 text-sm">-0.3% vs mês anterior</span>
-        </div>
-      </section>
+    <!-- Header -->
+    <header class="flex flex-wrap items-center mb-6 gap-3">
+      <div id="MenuContainer" class="relative">
+        <!-- O conteúdo será gerado via JS -->
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)] flex-1">Dashboard</h2>
+      <div id="userMenuContainer" class="ml-auto relative">
+        <!-- O conteúdo será gerado via JS -->
+      </div>
+    </header>
 
-      <!-- Gráficos -->
-      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="p-6 card-hover">
-          <h3 class="text-lg font-semibold mb-4">Vendas vs Meta</h3>
-          <canvas id="salesChart"></canvas>
-        </div>
-        <div class="p-6 card-hover">
-          <h3 class="text-lg font-semibold mb-4">Distribuição por Departamento</h3>
-          <canvas id="deptChart"></canvas>
-        </div>
-      </section>
+    <!-- KPIs -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="p-4 sm:p-6 card-hover flex flex-col gap-2">
+        <h3 class="text-sm text-gray-400 truncate">Total de Relatórios</h3>
+        <p class="text-2xl sm:text-3xl font-bold">2,847</p>
+        <span class="text-green-400 text-xs sm:text-sm truncate">+12.5% vs mês anterior</span>
+      </div>
+      <div class="p-4 sm:p-6 card-hover flex flex-col gap-2">
+        <h3 class="text-sm text-gray-400 truncate">Usuários Ativos</h3>
+        <p class="text-2xl sm:text-3xl font-bold">1,245</p>
+        <span class="text-green-400 text-xs sm:text-sm truncate">+8.2% vs mês anterior</span>
+      </div>
+      <div class="p-4 sm:p-6 card-hover flex flex-col gap-2">
+        <h3 class="text-sm text-gray-400 truncate">Downloads Hoje</h3>
+        <p class="text-2xl sm:text-3xl font-bold">342</p>
+        <span class="text-green-400 text-xs sm:text-sm truncate">+23.1% vs mês anterior</span>
+      </div>
+      <div class="p-4 sm:p-6 card-hover flex flex-col gap-2">
+        <h3 class="text-sm text-gray-400 truncate">Performance</h3>
+        <p class="text-2xl sm:text-3xl font-bold">98.5%</p>
+        <span class="text-red-400 text-xs sm:text-sm truncate">-0.3% vs mês anterior</span>
+      </div>
+    </section>
 
-      <!-- Atividade e Resumo -->
-      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-        <!-- Atividade -->
-        <div class="p-6 card-hover">
-          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">🔔 Atividade Recente</h3>
-          <ul class="space-y-4 text-sm">
-            <li class="flex items-start justify-between border-b border-gray-700 pb-3">
-              <div class="flex items-center gap-3">
-                <span class="w-8 h-8 flex items-center justify-center bg-blue-500/20 text-blue-400 rounded-full">📄</span>
-                <span>João Silva gerou relatório de vendas</span>
-              </div>
-              <span class="text-gray-400 text-xs">2 min atrás</span>
-            </li>
-            <li class="flex items-start justify-between border-b border-gray-700 pb-3">
-              <div class="flex items-center gap-3">
-                <span class="w-8 h-8 flex items-center justify-center bg-green-500/20 text-green-400 rounded-full">⬇️</span>
-                <span>Maria Santos baixou relatório financeiro</span>
-              </div>
-              <span class="text-gray-400 text-xs">5 min atrás</span>
-            </li>
-            <li class="flex items-start justify-between border-b border-gray-700 pb-3">
-              <div class="flex items-center gap-3">
-                <span class="w-8 h-8 flex items-center justify-center bg-yellow-500/20 text-yellow-400 rounded-full">📊</span>
-                <span>Pedro Costa acessou dashboard</span>
-              </div>
-              <span class="text-gray-400 text-xs">8 min atrás</span>
-            </li>
-            <li class="flex items-start justify-between">
-              <div class="flex items-center gap-3">
-                <span class="w-8 h-8 flex items-center justify-center bg-purple-500/20 text-purple-400 rounded-full">👤</span>
-                <span>Ana Oliveira criou novo usuário</span>
-              </div>
-              <span class="text-gray-400 text-xs">15 min atrás</span>
-            </li>
-          </ul>
-        </div>
+    <!-- Gráficos -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="p-4 sm:p-6 card-hover flex flex-col">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4">Vendas vs Meta</h3>
+        <canvas id="salesChart" class="w-full h-64 sm:h-80"></canvas>
+      </div>
+      <div class="p-4 sm:p-6 card-hover flex flex-col">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4">Distribuição por Departamento</h3>
+        <canvas id="deptChart" class="w-full h-64 sm:h-80"></canvas>
+      </div>
+    </section>
 
-        <!-- Resumo -->
-        <div class="p-6 card-hover">
-          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">📌 Resumo do Dia</h3>
-          <div class="grid grid-cols-2 gap-4 text-center">
-            <div class="p-4 card-hover">
-              <p class="text-2xl font-bold text-[var(--color-primary)]">25</p>
-              <p class="text-sm text-gray-400">Relatórios gerados</p>
+    <!-- Atividade e Resumo -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+
+      <!-- Atividade -->
+      <div class="p-4 sm:p-6 card-hover flex flex-col">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 flex items-center gap-2">🔔 Atividade Recente</h3>
+        <ul class="space-y-4 text-sm">
+          <li class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-gray-700 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 flex items-center justify-center bg-blue-500/20 text-blue-400 rounded-full">📄</span>
+              <span>João Silva gerou relatório de vendas</span>
             </div>
-            <div class="p-4 card-hover">
-              <p class="text-2xl font-bold text-green-400">17</p>
-              <p class="text-sm text-gray-400">Downloads</p>
+            <span class="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-0">2 min atrás</span>
+          </li>
+          <li class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-gray-700 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 flex items-center justify-center bg-green-500/20 text-green-400 rounded-full">⬇️</span>
+              <span>Maria Santos baixou relatório financeiro</span>
             </div>
-            <div class="p-4 card-hover">
-              <p class="text-2xl font-bold text-yellow-400">8</p>
-              <p class="text-sm text-gray-400">Acessos</p>
+            <span class="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-0">5 min atrás</span>
+          </li>
+          <li class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-gray-700 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 flex items-center justify-center bg-yellow-500/20 text-yellow-400 rounded-full">📊</span>
+              <span>Pedro Costa acessou dashboard</span>
             </div>
-            <div class="p-4 card-hover">
-              <p class="text-2xl font-bold text-purple-400">3</p>
-              <p class="text-sm text-gray-400">Novos usuários</p>
+            <span class="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-0">8 min atrás</span>
+          </li>
+          <li class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 flex items-center justify-center bg-purple-500/20 text-purple-400 rounded-full">👤</span>
+              <span>Ana Oliveira criou novo usuário</span>
             </div>
+            <span class="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-0">15 min atrás</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resumo -->
+      <div class="p-4 sm:p-6 card-hover flex flex-col">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 flex items-center gap-2">📌 Resumo do Dia</h3>
+        <div class="grid grid-cols-2 gap-4 text-center">
+          <div class="p-4 card-hover">
+            <p class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">25</p>
+            <p class="text-sm sm:text-base text-gray-400">Relatórios gerados</p>
+          </div>
+          <div class="p-4 card-hover">
+            <p class="text-2xl sm:text-3xl font-bold text-green-400">17</p>
+            <p class="text-sm sm:text-base text-gray-400">Downloads</p>
+          </div>
+          <div class="p-4 card-hover">
+            <p class="text-2xl sm:text-3xl font-bold text-yellow-400">8</p>
+            <p class="text-sm sm:text-base text-gray-400">Acessos</p>
+          </div>
+          <div class="p-4 card-hover">
+            <p class="text-2xl sm:text-3xl font-bold text-purple-400">3</p>
+            <p class="text-sm sm:text-base text-gray-400">Novos usuários</p>
           </div>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+  </main>
+</div>
 
-  <!-- FOOTER -->
-  <footer class="mt-10 card-hover"></footer>
+<!-- FOOTER -->
+<footer class="mt-10 card-hover"></footer>
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="../js/dashboard.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/dashboard.js"></script>
 
 </body>
 </html>

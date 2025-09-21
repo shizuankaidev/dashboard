@@ -7,126 +7,127 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="../css/colosA.css">
-  
-
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)]">
 
-<div class="flex h-screen">
+<div class="flex flex-col lg:flex-row h-screen overflow-hidden">
 
   <!-- Sidebar -->
-        <aside id="sidebar" class="hidden md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
-            <!-- O conteúdo será inserido via JS -->
-            </aside>
+  <aside id="sidebar" class="w-full lg:w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-shrink-0 flex flex-col">
+    <!-- Conteúdo será gerado via JS -->
+  </aside>
 
   <!-- Main -->
-  <main class="flex-1 p-6 overflow-y-auto">
+  <main class="flex-1 p-4 md:p-6 overflow-y-auto">
 
     <!-- Header -->
-    <header class="flex justify-between items-center mb-6 flex-wrap gap-3">
-      <h2 class="text-3xl font-bold text-[var(--color-primary)]">Analytics</h2>
-      <div class="flex gap-2">
-        <button class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg flex items-center gap-2">⚡ Atualizar</button>
-      </div>
+    <header class="flex items-center mb-6 flex-wrap gap-3">
+      <div id="MenuContainer" class="relative"></div>
+      <h2 class="text-2xl sm:text-xl font-bold text-[var(--color-primary)]">Analytics</h2>
+      <div id="userMenuContainer" class="ml-auto relative"></div>
     </header>
 
     <!-- Gráficos -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover">
-        <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">👥 Uso do Sistema - Hoje</h3>
-        <canvas id="usageChart" class="w-full h-64"></canvas>
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6">
+      <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover h-72 md:h-80">
+        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">👥 Uso do Sistema - Hoje</h3>
+        <canvas id="usageChart" class="w-full h-full"></canvas>
       </div>
-      <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover">
-        <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">⚡ Performance do Sistema</h3>
-        <canvas id="performanceChart" class="w-full h-64"></canvas>
+      <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover h-72 md:h-80">
+        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">⚡ Performance do Sistema</h3>
+        <canvas id="performanceChart" class="w-full h-full"></canvas>
       </div>
     </section>
 
     <!-- Cards de Métricas -->
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
-      <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover flex flex-col items-start gap-2">
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-6">
+      <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover flex flex-col gap-2">
         <div class="text-3xl font-bold text-[var(--color-primary)]">112ms</div>
-        <div class="text-sm text-gray-400 flex items-center gap-2">⏱ Tempo Médio de Resposta <span class="text-green-400">-8ms vs semana</span></div>
+        <div class="text-sm text-gray-400 flex items-center gap-2">
+          ⏱ Tempo Médio de Resposta <span class="text-green-400">-8ms vs semana</span>
+        </div>
       </div>
-      <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover flex flex-col items-start gap-2">
+      <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover flex flex-col gap-2">
         <div class="text-3xl font-bold text-green-400">89</div>
-        <div class="text-sm text-gray-400 flex items-center gap-2">👥 Pico de Usuários <span class="text-green-400">+15% vs ontem</span></div>
+        <div class="text-sm text-gray-400 flex items-center gap-2">
+          👥 Pico de Usuários <span class="text-green-400">+15% vs ontem</span>
+        </div>
       </div>
-      <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover flex flex-col items-start gap-2">
+      <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-lg rounded-2xl card-hover flex flex-col gap-2">
         <div class="text-3xl font-bold text-yellow-400">99.9%</div>
-        <div class="text-sm text-gray-400 flex items-center gap-2">✅ Disponibilidade <span class="text-green-400">SLA mantido</span></div>
+        <div class="text-sm text-gray-400 flex items-center gap-2">
+          ✅ Disponibilidade <span class="text-green-400">SLA mantido</span>
+        </div>
       </div>
     </section>
 
-    <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-    <!-- Estatísticas Detalhadas -->
-    <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-        <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition transform card-hover flex flex-col gap-3">
-        <div class="flex items-center gap-3">
+    <!-- Estatísticas Detalhadas e Departamento -->
+    <section class="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
+      
+      <!-- Estatísticas Detalhadas -->
+      <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6">
+        <!-- Card -->
+        <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition-transform flex flex-col gap-3">
+          <div class="flex items-center gap-3">
             <span class="text-2xl">📊</span>
             <div class="text-gray-400 font-semibold text-sm">Vendas Mensais</div>
-        </div>
-        <div class="text-3xl font-bold text-green-400">1247</div>
-        <div class="flex items-center gap-1 text-sm text-green-300">
-            <span>↑</span>
-            <span>+12%</span> vs semana anterior
-        </div>
+          </div>
+          <div class="text-3xl font-bold text-green-400">1247</div>
+          <div class="flex items-center gap-1 text-sm text-green-300">
+            <span>↑</span><span>+12%</span> vs semana anterior
+          </div>
         </div>
 
-        <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition transform card-hover flex flex-col gap-3">
-        <div class="flex items-center gap-3">
+        <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition-transform flex flex-col gap-3">
+          <div class="flex items-center gap-3">
             <span class="text-2xl">💰</span>
             <div class="text-gray-400 font-semibold text-sm">Performance Financeira</div>
-        </div>
-        <div class="text-3xl font-bold text-green-400">892</div>
-        <div class="flex items-center gap-1 text-sm text-green-300">
-            <span>↑</span>
-            <span>+8%</span> vs semana anterior
-        </div>
+          </div>
+          <div class="text-3xl font-bold text-green-400">892</div>
+          <div class="flex items-center gap-1 text-sm text-green-300">
+            <span>↑</span><span>+8%</span> vs semana anterior
+          </div>
         </div>
 
-        <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition transform card-hover flex flex-col gap-3">
-        <div class="flex items-center gap-3">
+        <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition-transform flex flex-col gap-3">
+          <div class="flex items-center gap-3">
             <span class="text-2xl">👥</span>
             <div class="text-gray-400 font-semibold text-sm">Análise de RH</div>
-        </div>
-        <div class="text-3xl font-bold text-red-500">654</div>
-        <div class="flex items-center gap-1 text-sm text-red-400">
-            <span>↓</span>
-            <span>-3%</span> vs semana anterior
-        </div>
+          </div>
+          <div class="text-3xl font-bold text-red-500">654</div>
+          <div class="flex items-center gap-1 text-sm text-red-400">
+            <span>↓</span><span>-3%</span> vs semana anterior
+          </div>
         </div>
 
-        <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition transform card-hover flex flex-col gap-3">
-        <div class="flex items-center gap-3">
+        <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-lg hover:scale-105 transition-transform flex flex-col gap-3">
+          <div class="flex items-center gap-3">
             <span class="text-2xl">📑</span>
             <div class="text-gray-400 font-semibold text-sm">Dashboard Executivo</div>
+          </div>
+          <div class="text-3xl font-bold text-green-400">543</div>
+          <div class="flex items-center gap-1 text-sm text-green-300">
+            <span>↑</span><span>+18%</span> vs semana anterior
+          </div>
         </div>
-        <div class="text-3xl font-bold text-green-400">543</div>
-        <div class="flex items-center gap-1 text-sm text-green-300">
-            <span>↑</span>
-            <span>+18%</span> vs semana anterior
-        </div>
-        </div>
-    </div>
+      </div>
 
-    <!-- Usuários por Departamento -->
-    <div class="p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:scale-105 transition transform card-hover flex flex-col h-full">
-        <!-- Título centralizado -->
-        <h3 class="text-2xl font-bold text-center flex items-center justify-center gap-3 mb-6">
-            👥 Usuários por Departamento
+      <!-- Usuários por Departamento -->
+      <div class="p-4 md:p-6 bg-[var(--color-accent)]/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:scale-105 transition-transform flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-center flex items-center justify-center gap-3 mb-4">
+          👥 Usuários por Departamento
         </h3>
-
-        <!-- Gráfico ocupando todo o espaço restante -->
         <div class="flex-1 flex items-center">
-            <canvas id="deptChart" class="w-full h-full"></canvas>
+          <canvas id="deptChart" class="w-full h-full"></canvas>
         </div>
-    </div>
+      </div>
+    </section>
+
+  </main>
 </div>
 
 <!-- FOOTER -->
-  <footer class="mt-10 bg-[var(--color-secondary)] text-gray-300 py-10 border-t border-gray-700"></footer>
-
+<footer id="footer"></footer>
 <script src="../js/main.js"></script>
 <script src="../js/analytics.js"></script>
 </body>

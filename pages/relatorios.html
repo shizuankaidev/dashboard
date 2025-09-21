@@ -5,39 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Relatórios Funcionais - @python-MeuSite</title>
 <script src="https://cdn.tailwindcss.com"></script>
-
 <link rel="stylesheet" href="../css/colosA.css">
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)]">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)] font-sans">
 
-<div class="flex h-screen">
+<div class="flex flex-col md:flex-row min-h-screen">
 
   <!-- Sidebar -->
-  <aside id="sidebar" class="hidden md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
+  <aside id="sidebar" class="w-full md:w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col md:flex md:fixed md:h-screen md:z-50">
     <!-- Conteúdo será inserido via JS -->
   </aside>
 
   <!-- Main -->
-  <main class="flex-1 p-6 overflow-y-auto">
+  <main class="flex-1 p-4 sm:p-6 md:ml-64 overflow-y-auto">
 
     <!-- Header -->
-    <header class="mb-6 flex flex-wrap justify-between items-center gap-3">
-      <h2 class="text-3xl font-bold text-[var(--color-primary)]">Relatórios</h2>
+    <header class="flex flex-wrap items-center mb-6 gap-3">
+      <div id="MenuContainer" class="relative"></div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)] flex-1">Relatórios</h2>
+      <div id="userMenuContainer" class="ml-auto relative"></div>
     </header>
 
     <!-- Lista de Relatórios -->
-    <section class="bg-[var(--color-accent)]/90 backdrop-blur-xl p-6 rounded-3xl card-hover">
-      <h3 class="text-lg font-semibold mb-4">📑 Lista de Relatórios</h3>
+    <section class="bg-[var(--color-accent)]/90 backdrop-blur-xl p-4 sm:p-6 rounded-3xl card-hover overflow-x-auto">
+      <h3 class="text-lg sm:text-xl font-semibold mb-4">📑 Lista de Relatórios</h3>
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse text-sm">
+        <table class="w-full min-w-[600px] sm:min-w-full border-collapse text-sm">
           <thead>
-            <tr class="bg-gray-700 text-left uppercase tracking-wide text-gray-300 text-xs">
-              <th class="px-4 py-3">ID</th>
-              <th class="px-4 py-3">Nome</th>
-              <th class="px-4 py-3">Tipo</th>
-              <th class="px-4 py-3">Data</th>
-              <th class="px-4 py-3">Status</th>
-              <th class="px-4 py-3 text-center">Ações</th>
+            <tr class="bg-gray-700 text-left uppercase tracking-wide text-gray-300 text-xs sm:text-sm">
+              <th class="px-3 sm:px-4 py-2">ID</th>
+              <th class="px-3 sm:px-4 py-2">Nome</th>
+              <th class="px-3 sm:px-4 py-2">Tipo</th>
+              <th class="px-3 sm:px-4 py-2">Data</th>
+              <th class="px-3 sm:px-4 py-2">Status</th>
+              <th class="px-3 sm:px-4 py-2 text-center">Ações</th>
             </tr>
           </thead>
           <tbody id="reportTable" class="divide-y divide-gray-600"></tbody>
@@ -49,54 +50,50 @@
 </div>
 
 <!-- Modal Relatório -->
-<div id="reportModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
-  <div class="bg-[var(--color-accent)]/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-8 w-11/12 md:w-2/3 max-h-[90vh] overflow-y-auto relative">
-    
-    <button id="closeReportModalBtn" class="absolute top-6 right-6 text-white text-3xl font-bold">&times;</button>
+<div id="reportModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50 p-4">
+  <div class="bg-[var(--color-accent)]/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-3xl max-h-[90vh] overflow-y-auto relative">
 
-    <h3 id="modalTitle" class="text-2xl font-bold mb-4">Título do Relatório</h3>
+    <button id="closeReportModalBtn" class="absolute top-4 sm:top-6 right-4 sm:right-6 text-white text-2xl sm:text-3xl font-bold">&times;</button>
 
-    <div id="modalInfo" class="mb-4 text-white">
+    <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold mb-4 truncate">Título do Relatório</h3>
+
+    <div id="modalInfo" class="mb-4 text-white space-y-1 sm:space-y-2 text-sm sm:text-base">
       <p id="modalTipo"><strong>Tipo:</strong> </p>
       <p id="modalPeriodo"><strong>Período:</strong> </p>
       <p id="modalData"><strong>Data:</strong> </p>
       <p id="modalTamanho"><strong>Tamanho:</strong> </p>
     </div>
 
-    <div class="flex gap-4">
-      <button id="downloadReportBtn" class="flex-1 px-5 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg font-semibold">
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
+      <button id="downloadReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
         ⬇ Download
       </button>
-      <button id="editReportBtn" class="flex-1 px-5 py-3 bg-yellow-500 hover:bg-yellow-600 transition rounded-xl shadow-lg font-semibold">
+      <button id="editReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-yellow-500 hover:bg-yellow-600 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
         ✏️ Editar
       </button>
     </div>
 
     <!-- Área de edição -->
-    <div id="editReportSection" class="hidden mt-6 flex flex-col gap-4">
-      <input type="text" id="editReportTitle" placeholder="Título" class="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-1 focus:ring-[var(--color-primary)]">
-      <textarea id="editReportContent" placeholder="Conteúdo do relatório..." class="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-600 resize-none h-40 focus:ring-1 focus:ring-[var(--color-primary)]"></textarea>
-      <div class="flex gap-4">
-        <button id="saveReportBtn" class="flex-1 px-5 py-3 bg-gradient-to-r from-blue-500 to-cyan-600 hover:scale-105 transition rounded-xl shadow-lg font-semibold">
+    <div id="editReportSection" class="hidden mt-4 sm:mt-6 flex flex-col gap-3 sm:gap-4">
+      <input type="text" id="editReportTitle" placeholder="Título" class="px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-1 focus:ring-[var(--color-primary)] text-sm sm:text-base w-full">
+      <textarea id="editReportContent" placeholder="Conteúdo do relatório..." class="px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-gray-800 text-white border border-gray-600 resize-none h-36 sm:h-40 focus:ring-1 focus:ring-[var(--color-primary)] text-sm sm:text-base w-full"></textarea>
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <button id="saveReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-blue-500 to-cyan-600 hover:scale-105 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
           💾 Salvar
         </button>
-        <button id="cancelEditReportBtn" class="flex-1 px-5 py-3 bg-gray-700 hover:bg-gray-600 transition rounded-xl shadow-lg font-semibold">
+        <button id="cancelEditReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-gray-700 hover:bg-gray-600 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
           ❌ Cancelar
         </button>
       </div>
     </div>
-    
+
   </div>
 </div>
 
 <!-- Footer -->
-<footer id="footer"></footer>
+<footer id="footer" class="mt-6 sm:mt-10"></footer>
 <script src="../js/main.js"></script>
 <script src="../js/relatorios.js"></script>
-
-<script>
-
-</script>
 
 </body>
 </html>

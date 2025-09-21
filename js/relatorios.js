@@ -1,105 +1,203 @@
+// ==================== CONFIG ====================
+const API_URL = "http://localhost:8000/api"; // 🔧 Troque pelo endereço da sua API
 
+// ==================== ELEMENTOS ====================
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const showRegister = document.getElementById("showRegister");
+const showLogin = document.getElementById("showLogin");
 
-/* ===================== RELATÓRIOS ===================== */
-const reports = [
-  {id:"#1024", nome:"Relatório Financeiro", tipo:"Financeiro", dept:"Financeiro", data:"2025-09-16", status:"Concluído", tamanho:"2.4 MB", conteudo:"Conteúdo do relatório financeiro mockado."},
-  {id:"#1025", nome:"Relatório de Vendas", tipo:"Analítico", dept:"Vendas", data:"2025-09-15", status:"Em Progresso", tamanho:"3.1 MB", conteudo:"Relatório de vendas mockado."},
-  {id:"#1026", nome:"Relatório de RH", tipo:"Usuário", dept:"RH", data:"2025-09-10", status:"Pendente", tamanho:"1.8 MB", conteudo:"Relatório de RH mockado."},
-  {id:"#1027", nome:"Relatório de Sistema", tipo:"Técnico", dept:"TI", data:"2025-09-12", status:"Concluído", tamanho:"2.7 MB", conteudo:"Relatório técnico mockado."},
-  {id:"#1028", nome:"Relatório Operacional", tipo:"Operacional", dept:"Vendas", data:"2025-09-17", status:"Em Progresso", tamanho:"2.0 MB", conteudo:"Relatório operacional mockado."}
+// ==================== HELPERS ====================
+const getColors = () => {
+  const style = getComputedStyle(document.documentElement);
+  return {
+    primary: style.getPropertyValue('--color-primary').trim(),
+    primaryHover: style.getPropertyValue('--color-primary-hover').trim(),
+    success: style.getPropertyValue('--color-success').trim(),
+    warning: style.getPropertyValue('--color-warning').trim(),
+    info: style.getPropertyValue('--color-info').trim(),
+    text: style.getPropertyValue('--color-text').trim(),
+    accent: style.getPropertyValue('--color-accent').trim(),
+    bgModal: style.getPropertyValue('--bg-modal').trim(),
+    glowPrimary: style.getPropertyValue('--glow-primary').trim(),
+  };
+};
+
+async function apiRequest(endpoint, method, body = null, token = null) {
+  try {
+    // Mock para login
+    if (endpoint === "/login" && method === "POST") {
+      if (body.username === "teste" && body.password === "123") {
+        return { ok: true, data: { token: "mock-jwt-token" } };
+      } else {
+        return { ok: false, data: { detail: "Usuário ou senha incorretos" } };
+      }
+    }
+    if (endpoint === "/register" && method === "POST") {
+      return { ok: true, data: { message: "Usuário criado com sucesso" } };
+    }
+
+    // Requisição real
+    const res = await fetch(`${API_URL}${endpoint}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` })
+      },
+      body: body ? JSON.stringify(body) : null
+    });
+    const data = await res.json();
+    return { ok: res.ok, data };
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+    return { ok: false, data: { detail: "Erro de conexão com servidor." } };
+  }
+}
+
+function saveToken(token) { localStorage.setItem("token", token); }
+function getToken() { return localStorage.getItem("token"); }
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "index.html";
+}
+
+// ==================== LOGIN ====================
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
+    const { ok, data } = await apiRequest("/login", "POST", { username, password });
+    if (ok) {
+      saveToken(data.token);
+      alert("Login realizado com sucesso!");
+      window.location.href = "dashboard.html";
+    } else {
+      alert(data.detail || "Erro ao fazer login");
+    }
+  });
+}
+
+// ==================== REGISTRO ====================
+if (registerForm) {
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("regUsername").value;
+    const email = document.getElementById("regEmail").value;
+    const password = document.getElementById("regPassword").value;
+    const { ok, data } = await apiRequest("/register", "POST", { username, email, password });
+    if (ok) {
+      alert("Conta criada com sucesso! Faça login.");
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    } else {
+      alert(data.detail || "Erro ao registrar");
+    }
+  });
+}
+
+// ==================== TROCA DE TELA ====================
+if (showRegister && showLogin) {
+  showRegister.addEventListener("click", () => {
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+    document.getElementById("formTitle").textContent = "Registrar";
+  });
+  showLogin.addEventListener("click", () => {
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
+    document.getElementById("formTitle").textContent = "Login";
+  });
+}
+
+// ==================== MOCK DE RELATÓRIOS ====================
+const mockReports = [
+  { id: 1, nome: "Relatório Vendas", tipo: "Financeiro", data: "2025-09-21", status: "Concluído", tamanho: "2MB", conteudo: "Conteúdo do relatório 1" },
+  { id: 2, nome: "Relatório Estoque", tipo: "Logística", data: "2025-09-20", status: "Pendente", tamanho: "1.5MB", conteudo: "Conteúdo do relatório 2" },
+  { id: 3, nome: "Relatório Marketing", tipo: "Marketing", data: "2025-09-19", status: "Concluído", tamanho: "3MB", conteudo: "Conteúdo do relatório 3" },
 ];
 
-const tableBody = document.getElementById("reportTable");
-const modal = document.getElementById("reportModal");
-const closeModalBtn = document.getElementById("closeReportModalBtn");
-const downloadBtn = document.getElementById("downloadReportBtn");
-const editBtn = document.getElementById("editReportBtn");
-const editSection = document.getElementById("editReportSection");
-const editTitle = document.getElementById("editReportTitle");
-const editContent = document.getElementById("editReportContent");
-const saveBtn = document.getElementById("saveReportBtn");
-const cancelEditBtn = document.getElementById("cancelEditReportBtn");
-const modalTitle = document.getElementById("modalTitle");
-const modalTipo = document.getElementById("modalTipo");
-const modalPeriodo = document.getElementById("modalPeriodo");
-const modalData = document.getElementById("modalData");
-const modalTamanho = document.getElementById("modalTamanho");
-
-let currentReport = null;
-
-// Renderiza tabela
-function renderTable() {
+// ==================== FUNÇÕES DE RELATÓRIO ====================
+function populateReportTable() {
+  const tableBody = document.getElementById("reportTable");
+  if (!tableBody) return;
+  const colors = getColors();
   tableBody.innerHTML = "";
-  reports.forEach((r,index)=>{
+
+  mockReports.forEach(r => {
     const tr = document.createElement("tr");
-    tr.className = "hover:bg-gray-800/80 transition";
+    tr.style.borderBottom = `1px solid ${colors.accent}`;
+    tr.onmouseenter = () => tr.style.backgroundColor = colors.accent + "22";
+    tr.onmouseleave = () => tr.style.backgroundColor = "transparent";
+
+    const btn = document.createElement("button");
+    btn.textContent = "Abrir";
+    btn.style.backgroundColor = colors.primary;
+    btn.style.color = colors.text;
+    btn.style.padding = "0.5rem 1rem";
+    btn.style.borderRadius = "0.75rem";
+    btn.style.fontWeight = "600";
+    btn.style.boxShadow = `0 0 6px ${colors.glowPrimary}, 0 3px 10px ${colors.accent}`;
+    btn.onmouseenter = () => btn.style.boxShadow = `0 0 18px ${colors.glowPrimary}, 0 6px 16px ${colors.accent}`;
+    btn.onmouseleave = () => btn.style.boxShadow = `0 0 6px ${colors.glowPrimary}, 0 3px 10px ${colors.accent}`;
+    btn.onclick = () => openReportModal(r.id);
+
     tr.innerHTML = `
-      <td class="px-4 py-3">${r.id}</td>
-      <td class="px-4 py-3 font-semibold">${r.nome}</td>
-      <td class="px-4 py-3">${r.tipo}</td>
-      <td class="px-4 py-3">${r.data}</td>
-      <td class="px-4 py-3"><span class="badge ${r.status==="Concluído"?"bg-green-600/80":r.status==="Em Progresso"?"bg-yellow-600/80":"bg-red-600/80"} text-white">${r.status}</span></td>
-      <td class="px-4 py-3 text-center space-x-2">
-        <button class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-lg transition" onclick="openModal(${index})">✏️ Editar</button>
-        <button class="px-3 py-1 bg-green-600 hover:bg-green-700 rounded-lg transition" onclick="downloadReport(${index})">⬇ ${r.tamanho}</button>
-      </td>
+      <td class="px-4 py-2">${r.id}</td>
+      <td class="px-4 py-2">${r.nome}</td>
+      <td class="px-4 py-2">${r.tipo}</td>
+      <td class="px-4 py-2">${r.data}</td>
+      <td class="px-4 py-2">${r.status}</td>
+      <td class="px-4 py-2 text-center"></td>
     `;
+    tr.querySelector("td:last-child").appendChild(btn);
     tableBody.appendChild(tr);
   });
 }
 
-// Abre modal
-function openModal(index){
-  currentReport = reports[index];
-  modalTitle.textContent = currentReport.nome;
-  modalTipo.textContent = `Tipo: ${currentReport.tipo}`;
-  modalPeriodo.textContent = `Período: Mensal`;
-  modalData.textContent = `Data: ${currentReport.data}`;
-  modalTamanho.textContent = `Tamanho: ${currentReport.tamanho}`;
-  editTitle.value = currentReport.nome;
-  editContent.value = currentReport.conteudo;
+function openReportModal(reportId) {
+  const colors = getColors();
+  const report = mockReports.find(r => r.id === reportId);
+  if (!report) return;
+
+  const modal = document.getElementById("reportModal");
   modal.classList.remove("hidden");
-  modal.classList.add("flex");
+  modal.style.background = colors.bgModal;
+  modal.style.boxShadow = `0 0 18px ${colors.glowPrimary}, 0 10px 20px ${colors.accent}`;
+
+  document.getElementById("modalTitle").textContent = report.nome;
+  document.getElementById("modalTipo").innerHTML = `<strong>Tipo:</strong> ${report.tipo}`;
+  document.getElementById("modalPeriodo").innerHTML = `<strong>Período:</strong> -`;
+  document.getElementById("modalData").innerHTML = `<strong>Data:</strong> ${report.data}`;
+  document.getElementById("modalTamanho").innerHTML = `<strong>Tamanho:</strong> ${report.tamanho}`;
+
+  const editSection = document.getElementById("editReportSection");
   editSection.classList.add("hidden");
+  document.getElementById("editReportTitle").value = report.nome;
+  document.getElementById("editReportContent").value = report.conteudo;
+
+  document.getElementById("downloadReportBtn").onclick = () => alert(`Baixando relatório: ${report.nome}`);
+  document.getElementById("editReportBtn").onclick = () => editSection.classList.remove("hidden");
 }
 
-// Fecha modal
-function closeModal(){
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
-  editSection.classList.add("hidden");
-}
-
-closeModalBtn.addEventListener("click", closeModal);
-document.addEventListener("keydown", e => { if(e.key==="Escape") closeModal(); });
-
-// Toggle edição
-editBtn.addEventListener("click", ()=> editSection.classList.toggle("hidden"));
-
-// Salvar alterações
-saveBtn.addEventListener("click", ()=>{
-  if(!currentReport) return;
-  currentReport.nome = editTitle.value;
-  currentReport.conteudo = editContent.value;
-  renderTable();
-  editSection.classList.add("hidden");
-  openModal(reports.indexOf(currentReport));
+// ==================== FECHAR MODAL ====================
+document.getElementById("closeReportModalBtn")?.addEventListener("click", () => {
+  document.getElementById("reportModal").classList.add("hidden");
 });
 
-// Cancelar edição
-cancelEditBtn.addEventListener("click", ()=> editSection.classList.add("hidden"));
+// ==================== SALVAR / CANCELAR EDIÇÃO ====================
+document.getElementById("saveReportBtn")?.addEventListener("click", () => {
+  const title = document.getElementById("editReportTitle").value;
+  const content = document.getElementById("editReportContent").value;
+  alert(`Salvando relatório: ${title}\nConteúdo: ${content}`);
+  document.getElementById("editReportSection").classList.add("hidden");
+});
 
-// Download mock
-function downloadReport(index){
-  const r = reports[index];
-  const blob = new Blob([r.conteudo], {type:"text/plain"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `${r.nome}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
+document.getElementById("cancelEditReportBtn")?.addEventListener("click", () => {
+  document.getElementById("editReportSection").classList.add("hidden");
+});
 
-// Inicializa tabela
-renderTable();
+// ==================== INICIALIZAÇÃO ====================
+document.addEventListener("DOMContentLoaded", () => {
+  populateReportTable();
+});

@@ -9,10 +9,11 @@
 </head>
 
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-[var(--color-text)] font-sans">
-<div class="flex h-screen">
+
+<div class="flex flex-col lg:flex-row min-h-screen">
 
   <!-- Sidebar -->
-  <aside id="sidebar" class="hidden md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
+  <aside id="sidebar" class=" lg:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col p-4">
       <!-- Conteúdo será inserido via JS -->
   </aside>
 
@@ -20,75 +21,76 @@
   <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
 
     <!-- Header -->
-    <header class="flex justify-between items-center mb-6 flex-wrap gap-3">
-      <h2 class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">Configurações</h2>
-      <div class="flex gap-3 flex-wrap">
-        <button id="saveSettingsBtn" class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg flex items-center gap-2">💾 Salvar</button>
-        <button id="exportConfigBtn" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 hover:scale-105 transition rounded-xl shadow-lg">📤 Exportar</button>
-        <button id="importConfigBtn" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:scale-105 transition rounded-xl shadow-lg">📥 Importar</button>
-        <button id="resetConfigBtn" class="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-600 hover:scale-105 transition rounded-xl shadow-lg">♻️ Resetar</button>
-      </div>
+    <header class="flex items-center mb-6 flex-wrap gap-3">
+      <div id="MenuContainer" class="relative"></div>
+      <h2 class="text-2xl sm:text-3xl font-bold text-[var(--color-primary)] flex-1">Configurações</h2>
+      <div id="userMenuContainer" class="ml-auto relative">
+  <!-- JS insere o dropdown -->
+</div>
+
+
     </header>
 
     <!-- Configurações da Empresa -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Informações da Empresa</h3>
-        <input type="text" id="companyName" placeholder="Nome da empresa">
-        <input type="text" id="companyId" placeholder="CNPJ ou ID">
-        <input type="text" id="companyAddress" placeholder="Endereço">
-        <input type="text" id="companyPhone" placeholder="Telefone">
-        <input type="email" id="companyEmail" placeholder="Email de contato">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-4 sm:p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg w-full">
+      <h3 class="text-lg sm:text-xl font-semibold text-white">Informações da Empresa</h3>
 
-        <!-- Input de logo -->
-        <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-          <span>Logo:</span>
-          <input type="file" id="companyLogo" accept="image/*" class="text-sm">
-        </label>
-
-        <!-- Preview da logo -->
-        <div class="mt-4 flex justify-center">
-          <img id="logoPreview" src="../assets/logo.svg" alt="Logo da Empresa" >
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input type="text" id="companyName" placeholder="Nome da empresa" class="input-field w-full">
+        <input type="text" id="companyId" placeholder="CNPJ ou ID" class="input-field w-full">
+        <input type="text" id="companyAddress" placeholder="Endereço" class="input-field w-full sm:col-span-2">
+        <input type="text" id="companyPhone" placeholder="Telefone" class="input-field w-full">
+        <input type="email" id="companyEmail" placeholder="Email de contato" class="input-field w-full">
       </div>
 
-      <!-- Identidade Visual -->
-      <div class="p-6 card-hover rounded-2xl bg-[var(--color-accent)] flex flex-col gap-4">
-        <h3 class="text-xl font-semibold text-white">Identidade Visual</h3>
+      <!-- Logo -->
+      <label class="flex flex-col sm:flex-row items-center justify-between p-2 rounded-lg bg-[var(--color-bg)] gap-2">
+        <span class="text-sm sm:text-base text-white">Logo:</span>
+        <input type="file" id="companyLogo" accept="image/*" class="text-sm sm:text-base w-full sm:w-auto">
+      </label>
 
-        <div class="flex flex-col gap-3">
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Cor Primária:</span>
+      <div class="mt-4 flex justify-center">
+        <img 
+          id="logoPreview" 
+          src="../assets/logo.svg" 
+          alt="Logo da Empresa" 
+          class="max-h-32 w-full sm:w-48 md:w-56 lg:w-64 object-contain"
+        >
+      </div>
+    </div>
+
+
+      <!-- Identidade Visual -->
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">Identidade Visual</h3>
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Cor Primária</span>
             <input type="color" id="primaryColor" value="#7c4dff" class="w-12 h-8 rounded border cursor-pointer">
           </label>
-
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Cor Secundária:</span>
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Cor Secundária</span>
             <input type="color" id="secondaryColor" value="#0f111a" class="w-12 h-8 rounded border cursor-pointer">
           </label>
-
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Cor de Destaque:</span>
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Destaque</span>
             <input type="color" id="accentColor" value="#1c1f2a" class="w-12 h-8 rounded border cursor-pointer">
           </label>
-
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Sucesso:</span>
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Sucesso</span>
             <input type="color" id="successColor" value="#22c55e" class="w-12 h-8 rounded border cursor-pointer">
           </label>
-
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Perigo:</span>
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Perigo</span>
             <input type="color" id="dangerColor" value="#ef4444" class="w-12 h-8 rounded border cursor-pointer">
           </label>
-
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Aviso:</span>
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Aviso</span>
             <input type="color" id="warningColor" value="#facc15" class="w-12 h-8 rounded border cursor-pointer">
           </label>
-
-          <label class="flex items-center justify-between p-2 rounded-lg bg-[var(--color-bg)]">
-            <span>Info:</span>
+          <label class="flex flex-col items-center gap-1 p-2 rounded-lg bg-[var(--color-bg)] w-full">
+            <span class="text-sm">Info</span>
             <input type="color" id="infoColor" value="#7c4dff" class="w-12 h-8 rounded border cursor-pointer">
           </label>
         </div>
@@ -96,80 +98,105 @@
     </section>
 
     <!-- Preferências Gerais -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Tema & Idioma</h3>
-        <select id="themeSelect" class="rounded-lg p-2 bg-[var(--color-bg)] text-[var(--color-text)]">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">Tema & Idioma</h3>
+        <select id="themeSelect" class="input-field">
           <option value="arch">Arch Linux</option>
           <option value="dark">Escuro</option>
           <option value="light">Claro</option>
         </select>
-        <select id="userLanguage" class="rounded-lg p-2 bg-[var(--color-bg)] text-[var(--color-text)]">
+        <select id="userLanguage" class="input-field">
           <option value="pt">Português</option>
           <option value="en">Inglês</option>
           <option value="es">Espanhol</option>
         </select>
-        <select id="dateFormat" class="rounded-lg p-2 bg-[var(--color-bg)] text-[var(--color-text)]">
+        <select id="dateFormat" class="input-field">
           <option value="dd/mm/yyyy">DD/MM/YYYY</option>
           <option value="mm/dd/yyyy">MM/DD/YYYY</option>
         </select>
       </div>
 
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Notificações</h3>
-        <label class="flex items-center justify-between"><span>Email</span><input type="checkbox" id="notifyEmail"></label>
-        <label class="flex items-center justify-between"><span>Push</span><input type="checkbox" id="notifyPush"></label>
-        <label class="flex items-center justify-between"><span>SMS</span><input type="checkbox" id="notifySms"></label>
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">Notificações</h3>
+        <label class="flex justify-between items-center">
+          <span>Email</span>
+          <input type="checkbox" id="notifyEmail">
+        </label>
+        <label class="flex justify-between items-center">
+          <span>Push</span>
+          <input type="checkbox" id="notifyPush">
+        </label>
+        <label class="flex justify-between items-center">
+          <span>SMS</span>
+          <input type="checkbox" id="notifySms">
+        </label>
       </div>
     </section>
 
-    <!-- API e Integrações -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Configuração da API</h3>
-        <input type="text" id="apiUrl" placeholder="URL da API" class="rounded-lg p-2 bg-[var(--color-bg)] text-[var(--color-text)]">
-        <input type="text" id="apiKey" placeholder="Chave de API" class="rounded-lg p-2 bg-[var(--color-bg)] text-[var(--color-text)]">
-        <button id="regenApiKeyBtn" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 hover:scale-105 transition rounded-xl shadow-lg">🔑 Regenerar API Key</button>
+    <!-- API & Integrações -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">API</h3>
+        <input type="text" id="apiUrl" placeholder="URL da API" class="input-field">
+        <input type="text" id="apiKey" placeholder="Chave de API" class="input-field">
+        <button id="regenApiKeyBtn" class="action-btn">🔑 Regenerar API Key</button>
       </div>
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Integrações</h3>
-        <input type="text" id="webhookUrl" placeholder="Webhook URL" class="rounded-lg p-2 bg-[var(--color-bg)] text-[var(--color-text)]">
-        <button id="testWebhookBtn" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:scale-105 transition rounded-xl shadow-lg">📡 Testar Webhook</button>
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">Integrações</h3>
+        <input type="text" id="webhookUrl" placeholder="Webhook URL" class="input-field">
+        <button id="testWebhookBtn" class="action-btn">📡 Testar Webhook</button>
       </div>
     </section>
 
     <!-- Privacidade & Segurança -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Privacidade</h3>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">Privacidade</h3>
         <label><input type="checkbox" id="gdprCompliance"> Ativar GDPR/Lei Geral</label>
         <label><input type="checkbox" id="anonymizeLogs"> Anonimizar Logs</label>
       </div>
-      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl">
-        <h3 class="text-xl font-semibold">Segurança</h3>
-        <label>Tempo de sessão (minutos): <input type="number" id="sessionTimeout" value="30"></label>
+      <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+        <h3 class="text-xl font-semibold text-white">Segurança</h3>
+        <label>Tempo de sessão (minutos): <input type="number" id="sessionTimeout" value="30" class="input-field"></label>
         <label><input type="checkbox" id="twoFactorAuth"> Exigir 2FA</label>
       </div>
     </section>
 
-    <!-- Administração de Funcionários -->
-    <section class="p-6 card-hover mb-6 rounded-2xl">
-      <h3 class="text-xl font-semibold mb-4">Equipe & Permissões</h3>
-      <table class="w-full table-auto text-left border-collapse border border-gray-700">
-        <thead><tr class="border-b border-gray-600"><th>Nome</th><th>Email</th><th>Cargo</th><th>Ações</th></tr></thead>
-        <tbody id="employeeTable"></tbody>
-      </table>
-      <button id="addEmployeeBtn" class="mt-4 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg">➕ Adicionar Funcionário</button>
+    <!-- Equipe -->
+    <section class="p-6 card-hover mb-6 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
+      <h3 class="text-xl font-semibold mb-4 text-white">Equipe & Permissões</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto text-left border-collapse border border-gray-700">
+          <thead class="bg-gray-800"><tr><th class="px-4 py-2">Nome</th><th class="px-4 py-2">Email</th><th class="px-4 py-2">Cargo</th><th class="px-4 py-2">Ações</th></tr></thead>
+          <tbody id="employeeTable" class="divide-y divide-gray-700"></tbody>
+        </table>
+      </div>
+      <button id="addEmployeeBtn" class="mt-4 action-btn">➕ Adicionar Funcionário</button>
     </section>
 
   </main>
 </div>
 
 <!-- FOOTER -->
-<footer class="mt-10 bg-[var(--color-secondary)] text-gray-300 py-10 border-t border-gray-700"></footer>
-
+<footer id="footer"></footer>
 <!-- JS -->
 <script src="../js/config.js"></script>
 <script src="../js/main.js"></script>
+
+<style>
+  .input-field { 
+    padding: 0.5rem; border-radius: 0.75rem; background-color: var(--color-bg); color: var(--color-text); border: 1px solid #444; width: 100%;
+  }
+  .action-btn {
+    padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; 
+    background: linear-gradient(to right, #4ade80, #22c55e); 
+    color: white; transition: transform 0.2s; 
+  }
+  .action-btn:hover { transform: scale(1.05); }
+  .card-hover { transition: transform 0.2s; } 
+  .card-hover:hover { transform: scale(1.02); }
+</style>
+
 </body>
 </html>

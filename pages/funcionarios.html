@@ -16,18 +16,21 @@
 <div class="flex h-screen">
 
   <!-- Sidebar -->
-    <aside id="sidebar" class="hidden md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
+    <aside id="sidebar" class=" md:flex w-64 bg-[var(--color-secondary)]/90 backdrop-blur-lg shadow-xl flex-col">
       <!-- O conteúdo será inserido via JS -->
     </aside>
 
   <!-- Main -->
   <main class="flex-1 p-6 overflow-y-auto">
 
-    <header class="flex justify-between items-center mb-8 flex-wrap gap-4">
-      <h2 class="text-3xl font-bold text-[var(--color-primary)]">👥 Funcionários</h2>
-      <button class="px-5 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg flex items-center gap-2">
-        ➕ Adicionar Funcionário
-      </button>
+    <header class="flex items-center mb-6 flex-wrap gap-3">
+      <div id="MenuContainer" class="relative">
+        <!-- O conteúdo será gerado via JS -->
+      </div>
+      <h2 class="text-2xl sm:text-xl font-bold text-[var(--color-primary)]">Funcionários</h2>
+      <div id="userMenuContainer" class="ml-auto relative">
+        <!-- O conteúdo será gerado via JS -->
+      </div>
     </header>
 
     <!-- Filtros -->
@@ -49,9 +52,10 @@
           <option>Médio</option>
           <option>Abaixo da Média</option>
         </select>
-        <button class="px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-600 hover:scale-105 transition rounded-xl shadow-lg flex items-center justify-center gap-2">
-          🔎 Aplicar
-        </button>
+        <button class="px-4 py-3 bg-[#7c4dff] hover:scale-105 transition rounded-xl shadow-lg flex items-center justify-center gap-2">
+  🔎 Aplicar
+</button>
+
       </div>
     </section>
 
