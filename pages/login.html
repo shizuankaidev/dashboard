@@ -1,72 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@python-MeuSite</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="../css/colosA.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@python-MeuSite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/colosA.css">
 </head>
-<body class=" via-gray-800 to-gray-900 text-[var(--color-text)] font-sans">
+<body class="min-h-screen flex flex-col text-[var(--color-text)] font-sans">
 
-<div class="flex-1 flex items-center justify-center px-4">
-    <img src="../assets/logo.svg" alt="" srcset="">
-  <div class="w-full max-w-md">
-    <div class="login-card">
-      <h2 class="text-3xl font-bold mb-6 text-center text-white" id="formTitle">Login</h2>
+  <!-- Container central -->
+  <main class="flex-1 flex items-center justify-center px-4 py-10">
+    <div class="flex flex-col md:flex-row items-center gap-8 w-full max-w-4xl">
       
-      <!-- Login Form -->
-      <form id="loginForm" class="space-y-4">
-        <div class="input-group">
-            <label for="loginUsername">Usuário</label>
-          <input type="text" id="loginUsername" placeholder=" " required class="w-full px-4 py-3 rounded-xl bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500">
-          
-        </div>
-        <div class="input-group">
-            <label for="loginPassword">Senha</label>
-          <input type="password" id="loginPassword" placeholder=" " required class="w-full px-4 py-3 rounded-xl bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500">
-          
-        </div>
-        <button type="submit">Entrar</button>
-        <p class="text-center mt-2 text-sm">
-          Não tem conta? 
-          <span class="text-purple-400 cursor-pointer" id="showRegister">Registre-se</span>
-        </p>
-      </form>
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <img src="../assets/logo.svg" alt="Logo do site" class="w-32 md:w-48 lg:w-56">
+      </div>
 
-      <!-- Registro Form -->
-      <form id="registerForm" class="space-y-4 hidden">
-        <div class="input-group">
-            <label for="regUsername">Usuário</label>
-          <input type="text" id="regUsername" placeholder=" " required>
+      <!-- Card -->
+      <div class="w-full max-w-md">
+        <div class="login-card bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 sm:p-8">
           
-        </div>
-        <div class="input-group">
-            <label for="regEmail">Email</label>
-          <input type="email" id="regEmail" placeholder=" " required>
+          <!-- Título -->
+          <h2 id="formTitle" class="text-3xl font-bold mb-6 text-center text-white">Login</h2>
           
+          <!-- Login Form -->
+          <form id="loginForm" class="space-y-4">
+            <div class="input-group">
+              <label for="loginUsername" class="block text-sm font-medium mb-1">Usuário</label>
+              <input type="text" id="loginUsername" placeholder="Digite seu usuário" required 
+                class="w-full px-4 py-3 rounded-xl bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div class="input-group">
+              <label for="loginPassword" class="block text-sm font-medium mb-1">Senha</label>
+              <input type="password" id="loginPassword" placeholder="Digite sua senha" required 
+                class="w-full px-4 py-3 rounded-xl bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <button type="submit" 
+              class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-md transition">
+              Entrar
+            </button>
+
+            <p class="text-center mt-2 text-sm text-gray-400">
+              Não tem conta? 
+              <span id="showRegister" class="text-purple-400 cursor-pointer hover:underline">Registre-se</span>
+            </p>
+          </form>
+
+          <!-- Registro Form -->
+          <form id="registerForm" class="space-y-4 hidden">
+            <div class="input-group">
+              <label for="regUsername" class="block text-sm font-medium mb-1">Usuário</label>
+              <input type="text" id="regUsername" placeholder="Crie seu usuário" required 
+                class="w-full px-4 py-3 rounded-xl bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div class="input-group">
+              <label for="regEmail" class="block text-sm font-medium mb-1">Email</label>
+              <input type="email" id="regEmail" placeholder="Digite seu email" required 
+                class="w-full px-4 py-3 rounded-xl bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div class="input-group">
+              <label for="regPassword" class="block text-sm font-medium mb-1">Senha</label>
+              <input type="password" id="regPassword" placeholder="Crie sua senha" required 
+                class="w-full px-4 py-3 rounded-xl bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <button type="submit" 
+              class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-md transition">
+              Registrar
+            </button>
+
+            <p class="text-center mt-2 text-sm text-gray-400">
+              Já tem conta? 
+              <span id="showLogin" class="text-purple-400 cursor-pointer hover:underline">Login</span>
+            </p>
+          </form>
         </div>
-        <div class="input-group">
-            <label for="regPassword">Senha</label>
-          <input type="password" id="regPassword" placeholder=" " required>
-          
-        </div>
-        <button type="submit">Registrar</button>
-        <p class="text-center mt-2 text-sm">
-          Já tem conta? 
-          <span class="text-purple-400 cursor-pointer" id="showLogin">Login</span>
-        </p>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
+  </main>
 
-<footer>
-  &copy; 2025 Arch Theme. Todos os direitos reservados.
-</footer>
+  <!-- Footer -->
+  <footer class="py-4 text-center text-gray-500 text-sm">
+    &copy; 2025 Arch Theme. Todos os direitos reservados.
+  </footer>
 
-<script src="../js/auth.js"></script>
-
+  <script src="../js/auth.js"></script>
 </body>
 </html>
