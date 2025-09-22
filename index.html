@@ -38,16 +38,9 @@
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-6"  style="margin-top: 100px;">
       <div class="p-4 sm:p-6 card-hover flex flex-col">
         <h3 class="text-lg sm:text-xl font-semibold mb-4">Vendas vs Meta</h3>
+        
         <canvas id="salesChart" class="w-full h-64 sm:h-80"></canvas>
-      </div>
-      <div class="p-4 sm:p-6 card-hover flex flex-col">
-        <h3 class="text-lg sm:text-xl font-semibold mb-4">Distribuição por Departamento</h3>
-        <canvas id="deptChart" class="w-full h-64 sm:h-80"></canvas>
-      </div>
-    </section>
-
-    <!-- KPIs -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" style="margin-top: 30px;">
       <div class="p-4 sm:p-6 card-hover flex flex-col gap-2">
         <h3 class="text-sm text-gray-400 truncate">Total de Relatórios</h3>
         <p class="text-2xl sm:text-3xl font-bold">2,847</p>
@@ -69,6 +62,16 @@
         <span class="text-red-400 text-xs sm:text-sm truncate">-0.3% vs mês anterior</span>
       </div>
     </section>
+      </div>
+      
+      <div class="p-4 sm:p-6 card-hover flex flex-col">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4">Distribuição por Departamento</h3>
+        <canvas id="deptChart" class="w-full h-64 sm:h-80"></canvas>
+      </div>
+    </section>
+
+    <!-- KPIs -->
+
 
     
 
@@ -137,35 +140,8 @@
 </div>
 
 <!-- FOOTER -->
-<footer class="bg-[var(--color-accent)] text-white">
-  <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-    
-    <!-- Logo e Empresa -->
-    <div class="flex items-center gap-4">
-      <img src="../assets/logo.svg" alt="Logo" class="w-16 h-16 rounded-lg shadow-lg">
-      <div>
-        <p class="font-bold text-lg">@python-MeuSite Inc.</p>
-        <p class="text-sm text-gray-400">Rua Fictícia, 123 - São Paulo</p>
-      </div>
-    </div>
+<footer>
 
-    <!-- Contato -->
-    <div class="text-center md:text-left">
-      <p class="text-gray-300 text-sm">📞 (11) 98765-4321 | ✉️ contato@python-MeuSite.com</p>
-      <p class="text-gray-500 text-xs">ID: 12.345.678/0001-99</p>
-    </div>
-
-    <!-- Redes Sociais -->
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Facebook</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Twitter</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">LinkedIn</a>
-    </div>
-  </div>
-
-  <div class="bg-[var(--color-secondary)] text-gray-400 text-xs text-center py-4">
-    &copy; 2025 @python-MeuSite Inc. Todos os direitos reservados.
-  </div>
 </footer>
 
 

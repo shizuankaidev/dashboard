@@ -45,23 +45,6 @@ let appConfig = {
   ]
 };
 
-// ======================= DOM READY =======================
-document.addEventListener("DOMContentLoaded", () => {
-  renderFooter();
-  carregarConfigNaUI();
-  bindEvents();
-  console.log("✅ Configurações carregadas.");
-});
-
-// ======================= UI RENDER =======================
-function renderFooter() {
-  const footer = document.querySelector("footer");
-  footer.innerHTML = `
-    <p class="text-sm">© ${new Date().getFullYear()} @python-MeuSite. Todos os direitos reservados.</p>
-    <p class="text-xs opacity-70">Versão 1.0.0</p>
-  `;
-}
-
 function carregarConfigNaUI() {
   // Empresa
   const empresa = appConfig.empresa;

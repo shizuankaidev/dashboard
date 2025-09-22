@@ -20,14 +20,14 @@
   <main class="flex-1 p-4 sm:p-6  overflow-y-auto">
 
     <!-- Header -->
-    <header class="flex flex-wrap items-center mb-6 gap-3 fixed top-0 left-0 w-full bg-[var(--color-secondary)] z-50 p-4 shadow-lg">
+    <header class="color-[var(--color-text)] flex flex-wrap items-center mb-6 gap-3 fixed top-0 left-0 w-full bg-[var(--color-secondary)] z-50 p-4 shadow-lg">
       <div id="MenuContainer" class="relative"></div>
       <h2 class="text-2xl sm:text-xl font-bold text-[var(--color-primary)]">Relatórios</h2>
       <div id="userMenuContainer" class="ml-auto relative"></div>
     </header>
 
     <!-- Lista de Relatórios -->
-    <section class="bg-[var(--color-accent)]/90 backdrop-blur-xl p-4 sm:p-6 rounded-3xl card-hover overflow-x-auto" style="margin-top: 100px;">
+    <section class="p-4 sm:p-6 rounded-3xl card-hover overflow-x-auto" style="margin-top: 100px;">
       <h3 class="text-lg sm:text-xl font-semibold mb-4">📑 Lista de Relatórios</h3>
       <div class="overflow-x-auto">
         <table class="w-full min-w-[600px] sm:min-w-full border-collapse text-sm">
@@ -53,7 +53,18 @@
 <div id="reportModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50 p-4">
   <div class="bg-[var(--color-accent)]/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-3xl max-h-[90vh] overflow-y-auto relative">
 
-    <button id="closeReportModalBtn" class="absolute top-4 sm:top-6 right-4 sm:right-6 text-white text-2xl sm:text-3xl font-bold">&times;</button>
+    <button id="closeReportModalBtn" 
+      class="absolute top-4 sm:top-6 right-4 sm:right-6 
+            bg-[var(--color-primary)] text-white 
+            text-xl sm:text-2xl font-bold 
+            w-10 h-10 sm:w-12 sm:h-12 
+            flex items-center justify-center 
+            rounded-[var(--border-radius)] 
+            shadow-lg hover:scale-110 hover:shadow-xl 
+            transition">
+      &times;
+    </button>
+
 
     <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold mb-4 truncate">Título do Relatório</h3>
 
@@ -65,23 +76,22 @@
     </div>
 
     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
-      <button id="downloadReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
+      <button id="downloadReportBtn" class="action-btn flex-1 px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base">
         ⬇ Download
       </button>
-      <button id="editReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-yellow-500 hover:bg-yellow-600 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
+      <button id="editReportBtn" class="action-btn flex-1 px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base">
         ✏️ Editar
       </button>
     </div>
 
-    <!-- Área de edição -->
     <div id="editReportSection" class="hidden mt-4 sm:mt-6 flex flex-col gap-3 sm:gap-4">
-      <input type="text" id="editReportTitle" placeholder="Título" class="px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-1 focus:ring-[var(--color-primary)] text-sm sm:text-base w-full">
-      <textarea id="editReportContent" placeholder="Conteúdo do relatório..." class="px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-gray-800 text-white border border-gray-600 resize-none h-36 sm:h-40 focus:ring-1 focus:ring-[var(--color-primary)] text-sm sm:text-base w-full"></textarea>
+      <input type="text" id="editReportTitle" ...>
+      <textarea id="editReportContent" ...></textarea>
       <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-        <button id="saveReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-blue-500 to-cyan-600 hover:scale-105 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
+        <button id="saveReportBtn" class="action-btn flex-1 px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base">
           💾 Salvar
         </button>
-        <button id="cancelEditReportBtn" class="flex-1 px-4 py-2 sm:px-5 sm:py-3 bg-gray-700 hover:bg-gray-600 transition rounded-xl shadow-lg font-semibold text-sm sm:text-base">
+        <button id="cancelEditReportBtn" class="action-btn flex-1 px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base">
           ❌ Cancelar
         </button>
       </div>
@@ -91,35 +101,8 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-[var(--color-accent)] text-white">
-  <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-    
-    <!-- Logo e Empresa -->
-    <div class="flex items-center gap-4">
-      <img src="../assets/logo.svg" alt="Logo" class="w-16 h-16 rounded-lg shadow-lg">
-      <div>
-        <p class="font-bold text-lg">@python-MeuSite Inc.</p>
-        <p class="text-sm text-gray-400">Rua Fictícia, 123 - São Paulo</p>
-      </div>
-    </div>
+<footer>
 
-    <!-- Contato -->
-    <div class="text-center md:text-left">
-      <p class="text-gray-300 text-sm">📞 (11) 98765-4321 | ✉️ contato@python-MeuSite.com</p>
-      <p class="text-gray-500 text-xs">ID: 12.345.678/0001-99</p>
-    </div>
-
-    <!-- Redes Sociais -->
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Facebook</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Twitter</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">LinkedIn</a>
-    </div>
-  </div>
-
-  <div class="bg-[var(--color-secondary)] text-gray-400 text-xs text-center py-4">
-    &copy; 2025 @python-MeuSite Inc. Todos os direitos reservados.
-  </div>
 </footer>
 
 <script src="../js/main.js"></script>

@@ -1,0 +1,51 @@
+Arch linux:
+
+  --color-primary: #1793d1;          /* 💙 Arch Blue */
+  --color-primary-hover: #1c7ed6;    /* 💠 Highlight Blue */
+  --color-secondary: #0a0d14;        /* 🖤 Dark Background */
+  --color-accent: #12161f;           /* 🌑 Card / Panel Background */
+  --color-bg: #0f111a;               /* 🖤 Main Background */
+  --color-bg2: #1b1f2b;              /* 🌌 Gradient Overlay */
+  --color-text: #e0e0e0;             /* ⚪ Light Gray Text */
+
+  /* ✅ Semantic Colors */
+  --color-success: #22c55e;          /* 🌿 Green */
+  --color-danger: #ef4444;           /* 🔴 Red */
+  --color-warning: #facc15;          /* ⚠️ Yellow */
+  --color-info: #1c7ed6;             /* ℹ️ Info Blue */
+  --color-text-Dackground: #b9b9b9;
+
+  /* ✨ Glow / Shadows */
+  --glow-primary: #1793d1aa;         /* Neon Blue Glow */
+  --glow-accent: #1c1f2aaa;          /* Subtle Accent Glow */
+  --glow-success: #22c55eaa;         /* Success Glow */
+  --glow-danger: #ef4444aa;          /* Danger Glow */
+  --glow-warning: #facc15aa;         /* Warning Glow */
+  --glow-info: #1c7ed6aa;            /* Info Glow */
+
+=============================================================================================================
+
+Rosa Hello Kitty
+
+  --color-primary: #ff66b2;          /* 💖 Pink */
+  --color-primary-hover: #ff85c1;    /* 💗 Highlight Pink */
+  --color-secondary: #2b1a2f;        /* 🌑 Dark Background */
+  --color-accent: #3c1f45;           /* 🟣 Card / Panel Background */
+  --color-bg: #1c0f28;               /* 🌌 Main Background */
+  --color-bg2: #321540;              /* 🌙 Gradient Overlay */
+  --color-text: #ffffff;             /* ⚪ White Text */
+  --color-text-background: #f8e1f4;  /* 🌸 Light Pink for subtle text */
+
+  /* ✅ Semantic Colors */
+  --color-success: #ffb3c6;          /* 🌿 Light Pink for success */
+  --color-danger: #ff4d94;           /* 🔴 Pink Red */
+  --color-warning: #ffd6e8;          /* ⚠️ Soft Pink Yellow */
+  --color-info: #d1a3ff;             /* ℹ️ Lilac / Purple */
+
+  /* ✨ Glow / Shadows */
+  --glow-primary: #ff66b2aa;         /* Neon Pink Glow */
+  --glow-accent: #3c1f45aa;          /* Subtle Accent Glow */
+  --glow-success: #ffb3c6aa;
+  --glow-danger: #ff4d94aa;
+  --glow-warning: #ffd6e8aa;
+  --glow-info: #d1a3ffaa;

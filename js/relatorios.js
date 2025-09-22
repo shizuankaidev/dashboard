@@ -121,25 +121,15 @@ const mockReports = [
 function populateReportTable() {
   const tableBody = document.getElementById("reportTable");
   if (!tableBody) return;
-  const colors = getColors();
   tableBody.innerHTML = "";
 
   mockReports.forEach(r => {
     const tr = document.createElement("tr");
-    tr.style.borderBottom = `1px solid ${colors.accent}`;
-    tr.onmouseenter = () => tr.style.backgroundColor = colors.accent + "22";
-    tr.onmouseleave = () => tr.style.backgroundColor = "transparent";
+    tr.className = "border-b border-[var(--color-accent)] hover:bg-[rgba(124,77,255,0.1)] transition";
 
     const btn = document.createElement("button");
     btn.textContent = "Abrir";
-    btn.style.backgroundColor = colors.primary;
-    btn.style.color = colors.text;
-    btn.style.padding = "0.5rem 1rem";
-    btn.style.borderRadius = "0.75rem";
-    btn.style.fontWeight = "600";
-    btn.style.boxShadow = `0 0 6px ${colors.glowPrimary}, 0 3px 10px ${colors.accent}`;
-    btn.onmouseenter = () => btn.style.boxShadow = `0 0 18px ${colors.glowPrimary}, 0 6px 16px ${colors.accent}`;
-    btn.onmouseleave = () => btn.style.boxShadow = `0 0 6px ${colors.glowPrimary}, 0 3px 10px ${colors.accent}`;
+    btn.className = "action-btn px-3 py-2 text-sm";
     btn.onclick = () => openReportModal(r.id);
 
     tr.innerHTML = `
@@ -156,14 +146,12 @@ function populateReportTable() {
 }
 
 function openReportModal(reportId) {
-  const colors = getColors();
   const report = mockReports.find(r => r.id === reportId);
   if (!report) return;
 
   const modal = document.getElementById("reportModal");
   modal.classList.remove("hidden");
-  modal.style.background = colors.bgModal;
-  modal.style.boxShadow = `0 0 18px ${colors.glowPrimary}, 0 10px 20px ${colors.accent}`;
+  modal.classList.add("modal-active");
 
   document.getElementById("modalTitle").textContent = report.nome;
   document.getElementById("modalTipo").innerHTML = `<strong>Tipo:</strong> ${report.tipo}`;
@@ -176,8 +164,15 @@ function openReportModal(reportId) {
   document.getElementById("editReportTitle").value = report.nome;
   document.getElementById("editReportContent").value = report.conteudo;
 
-  document.getElementById("downloadReportBtn").onclick = () => alert(`Baixando relatório: ${report.nome}`);
-  document.getElementById("editReportBtn").onclick = () => editSection.classList.remove("hidden");
+  // Botões do modal também com action-btn
+  const downloadBtn = document.getElementById("downloadReportBtn");
+  const editBtn = document.getElementById("editReportBtn");
+
+  downloadBtn.classList.add("action-btn");
+  editBtn.classList.add("action-btn");
+
+  downloadBtn.onclick = () => alert(`Baixando relatório: ${report.nome}`);
+  editBtn.onclick = () => editSection.classList.remove("hidden");
 }
 
 // ==================== FECHAR MODAL ====================

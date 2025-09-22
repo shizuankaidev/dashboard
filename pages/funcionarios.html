@@ -34,25 +34,34 @@
     </header>
 
     <!-- Filtros -->
-    <section class="mb-6 bg-[var(--color-accent)]/80 backdrop-blur-lg p-5 rounded-3xl card-hover" style="margin-top: 100px;">
+    <section class="text-[var(--color-text)] mb-6 bg-[var(--color-accent)]/80 backdrop-blur-lg p-5 rounded-3xl card-hover" style="margin-top: 100px;">
       <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">🔍 Filtros</h3>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <input type="text" placeholder="Buscar nome..." class="px-4 py-3 rounded-xl w-full bg-gray-900/70 text-white border border-gray-600 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] transition">
-        <select class="px-4 py-3 rounded-xl w-full bg-gray-900/70 text-white border border-gray-600 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] transition">
-          <option>Todos os Cargos</option>
-          <option>Vendas</option>
-          <option>Financeiro</option>
-          <option>Marketing</option>
-          <option>TI</option>
+        <input type="text" placeholder="Buscar nome..." class="border-none px-4 py-3 rounded-xl w-full text-white border border-gray-600 focus:border-[var(--color-primary)] focus:ring-1 placeholder-[var(--color-text)] focus:ring-[var(--color-primary)] transition">
+        <!-- Primeiro select -->
+        <select 
+            class="px-4 py-3 rounded-xl w-full border border-gray-600 
+                  text-[var(--color-text)] placeholder-[var(--color-text)]
+                  focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] transition border-none">
+            <option>Todos os Cargos</option>
+            <option>Vendas</option>
+            <option>Financeiro</option>
+            <option>Marketing</option>
+            <option>TI</option>
         </select>
-        <select class="px-4 py-3 rounded-xl w-full bg-gray-900/70 text-white border border-gray-600 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] transition">
-          <option>Todos os Desempenhos</option>
-          <option>Excelente</option>
-          <option>Bom</option>
-          <option>Médio</option>
-          <option>Abaixo da Média</option>
+
+        <select 
+            class="px-4 py-3 rounded-xl w-full border border-gray-600 
+                  text-[var(--color-text)] placeholder-[var(--color-text)]
+                  focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] transition border-none">
+            <option>Todos os Cargos</option>
+            <option>Excelente</option>
+            <option>Bom</option>
+            <option>Médio</option>
+            <option>Abaixo da Média</option>
         </select>
-        <button class="px-4 py-3 bg-[#7c4dff] hover:scale-105 transition rounded-xl shadow-lg flex items-center justify-center gap-2">
+
+        <button class="px-4 py-3 bg-[var(--color-primary)] hover:scale-105 transition rounded-xl shadow-lg flex items-center justify-center gap-2">
   🔎 Aplicar
 </button>
 
@@ -183,35 +192,7 @@
 
 
 <!-- FOOTER -->
-<footer class="bg-[var(--color-accent)] text-white">
-  <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-    
-    <!-- Logo e Empresa -->
-    <div class="flex items-center gap-4">
-      <img src="../assets/logo.svg" alt="Logo" class="w-16 h-16 rounded-lg shadow-lg">
-      <div>
-        <p class="font-bold text-lg">@python-MeuSite Inc.</p>
-        <p class="text-sm text-gray-400">Rua Fictícia, 123 - São Paulo</p>
-      </div>
-    </div>
-
-    <!-- Contato -->
-    <div class="text-center md:text-left">
-      <p class="text-gray-300 text-sm">📞 (11) 98765-4321 | ✉️ contato@python-MeuSite.com</p>
-      <p class="text-gray-500 text-xs">ID: 12.345.678/0001-99</p>
-    </div>
-
-    <!-- Redes Sociais -->
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Facebook</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Twitter</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">LinkedIn</a>
-    </div>
-  </div>
-
-  <div class="bg-[var(--color-secondary)] text-gray-400 text-xs text-center py-4">
-    &copy; 2025 @python-MeuSite Inc. Todos os direitos reservados.
-  </div>
+<footer>
 </footer>
 
 

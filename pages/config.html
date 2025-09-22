@@ -37,25 +37,25 @@
       <h3 class="text-lg sm:text-xl font-semibold text-white">Informações da Empresa</h3>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input type="text" id="companyName" placeholder="Nome da empresa" class="input-field w-full">
-        <input type="text" id="companyId" placeholder="CNPJ ou ID" class="input-field w-full">
-        <input type="text" id="companyAddress" placeholder="Endereço" class="input-field w-full sm:col-span-2">
-        <input type="text" id="companyPhone" placeholder="Telefone" class="input-field w-full">
-        <input type="email" id="companyEmail" placeholder="Email de contato" class="input-field w-full">
+        <input type="text" id="companyName" placeholder="Nome da empresa" class="input-field w-full placeholder-[var(--color-text)]">
+        <input type="text" id="companyId" placeholder="CNPJ ou ID" class="input-field w-full placeholder-[var(--color-text)]">
+        <input type="text" id="companyAddress" placeholder="Endereço" class="input-field w-full sm:col-span-2 placeholder-[var(--color-text)]">
+        <input type="text" id="companyPhone" placeholder="Telefone" class="input-field w-full placeholder-[var(--color-text)]">
+        <input type="email" id="companyEmail" placeholder="Email de contato" class="input-field w-full placeholder-[var(--color-text)]">
       </div>
 
       <!-- Logo -->
       <label class="flex flex-col sm:flex-row items-center justify-between p-2 rounded-lg bg-[var(--color-bg)] gap-2">
-        <span class="text-sm sm:text-base text-white">Logo:</span>
+        <span class="text-sm sm:text-base text-[var(--color-text)]">Logo:</span>
         <input type="file" id="companyLogo" accept="image/*" class="text-sm sm:text-base w-full sm:w-auto">
       </label>
 
-      <div class="mt-4 flex justify-center">
+      <div class="w- mt-4 flex justify-center">
         <img 
           id="logoPreview" 
           src="../assets/logo.svg" 
           alt="Logo da Empresa" 
-          class="max-h-32 w-full sm:w-48 md:w-56 lg:w-64 object-contain"
+          class="w-full sm:w-48 md:w-56 lg:w-64 object-contain"
         >
       </div>
     </div>
@@ -63,47 +63,47 @@
 
       <!-- Identidade Visual -->
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">Identidade Visual</h3>
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">Identidade Visual</h3>
         
         <!-- CONTROLE DE CORES -->
         <div class="flex flex-col gap-2">
-          <label class="text-white">Cor Primária</label>
+          <label class="text-[var(--color-text)]">Cor Primária</label>
           <input type="color" id="colorPrimary" value="#7c4dff">
         </div>
         <div class="flex flex-col gap-2">
-          <label class="text-white">Cor Secundária</label>
+          <label class="text-[var(--color-text)]">Cor Secundária</label>
           <input type="color" id="colorSecondary" value="#0f111a">
         </div>
         <div class="flex flex-col gap-2">
-          <label class="text-white">Cor de Fundo</label>
+          <label class="text-[var(--color-text)]">Cor de Fundo</label>
           <input type="color" id="colorBg" value="#7c4dff">
         </div>
         
         <!-- CONTROLE DE BORDAS -->
         <div class="flex flex-col gap-2">
-          <label class="text-white">Raio das Bordas</label>
+          <label class="text-[var(--color-text)]">Raio das Bordas</label>
           <input type="range" id="borderRadius" min="0" max="50" value="24">
         </div>
         <div class="flex flex-col gap-2">
-          <label class="text-white">Espessura da Borda</label>
+          <label class="text-[var(--color-text)]">Espessura da Borda</label>
           <input type="range" id="borderWidth" min="0" max="10" value="1">
         </div>
         
         <!-- CONTROLE DE SOMBRAS -->
         <div class="flex flex-col gap-2">
-          <label class="text-white">Sombra do Card</label>
+          <label class="text-[var(--color-text)]">Sombra do Card</label>
           <input type="range" id="shadowCard" min="0" max="50" value="12">
         </div>
         
         <!-- CONTROLE DE FONTES -->
         <div class="flex flex-col gap-2">
-          <label class="text-white">Tamanho da Fonte</label>
+          <label class="text-[var(--color-text)]">Tamanho da Fonte</label>
           <input type="range" id="fontSize" min="10" max="36" value="16">
         </div>
         
         <!-- CONTROLE DE OPACIDADE / BACKDROP -->
         <div class="flex flex-col gap-2">
-          <label class="text-white">Opacidade do Fundo</label>
+          <label class="text-[var(--color-text)]">Opacidade do Fundo</label>
           <input type="range" id="bgOpacity" min="0" max="100" value="90">
         </div>
       </div>
@@ -113,7 +113,7 @@
     <!-- Preferências Gerais -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">Tema & Idioma</h3>
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">Tema & Idioma</h3>
         <select id="themeSelect" class="input-field">
           <option value="arch">Arch Linux</option>
           <option value="dark">Escuro</option>
@@ -131,7 +131,7 @@
       </div>
 
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">Notificações</h3>
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">Notificações</h3>
         <label class="flex justify-between items-center">
           <span>Email</span>
           <input type="checkbox" id="notifyEmail">
@@ -150,27 +150,27 @@
     <!-- API & Integrações -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">API</h3>
-        <input type="text" id="apiUrl" placeholder="URL da API" class="input-field">
-        <input type="text" id="apiKey" placeholder="Chave de API" class="input-field">
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">API</h3>
+        <input type="text" id="apiUrl" placeholder="URL da API" class="input-field placeholder-[var(--color-text)]">
+        <input type="text" id="apiKey" placeholder="Chave de API" class="input-field placeholder-[var(--color-text)]">
         <button id="regenApiKeyBtn" class="action-btn">🔑 Regenerar API Key</button>
       </div>
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">Integrações</h3>
-        <input type="text" id="webhookUrl" placeholder="Webhook URL" class="input-field">
-        <button id="testWebhookBtn" class="action-btn">📡 Testar Webhook</button>
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">Integrações</h3>
+        <input type="text" id="webhookUrl" placeholder="Webhook URL" class="input-field placeholder-[var(--color-text)]">
+        <button id="testWebhookBtn" class="action-btn ">📡 Testar Webhook</button>
       </div>
     </section>
 
     <!-- Privacidade & Segurança -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">Privacidade</h3>
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">Privacidade</h3>
         <label><input type="checkbox" id="gdprCompliance"> Ativar GDPR/Lei Geral</label>
         <label><input type="checkbox" id="anonymizeLogs"> Anonimizar Logs</label>
       </div>
       <div class="p-6 card-hover flex flex-col gap-4 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-        <h3 class="text-xl font-semibold text-white">Segurança</h3>
+        <h3 class="text-xl font-semibold text-[var(--color-text)]">Segurança</h3>
         <label>Tempo de sessão (minutos): <input type="number" id="sessionTimeout" value="30" class="input-field"></label>
         <label><input type="checkbox" id="twoFactorAuth"> Exigir 2FA</label>
       </div>
@@ -178,7 +178,7 @@
 
     <!-- Equipe -->
     <section class="p-6 card-hover mb-6 rounded-2xl bg-[var(--color-accent)]/90 backdrop-blur-lg">
-      <h3 class="text-xl font-semibold mb-4 text-white">Equipe & Permissões</h3>
+      <h3 class="text-xl font-semibold mb-4 text-[var(--color-text)]">Equipe & Permissões</h3>
       <div class="overflow-x-auto">
         <table class="w-full table-auto text-left border-collapse border border-gray-700">
           <thead class="bg-gray-800"><tr><th class="px-4 py-2">Nome</th><th class="px-4 py-2">Email</th><th class="px-4 py-2">Cargo</th><th class="px-4 py-2">Ações</th></tr></thead>
@@ -192,55 +192,15 @@
 </div>
 
 <!-- FOOTER -->
-<footer class="bg-[var(--color-accent)] text-white">
-  <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-    
-    <!-- Logo e Empresa -->
-    <div class="flex items-center gap-4">
-      <img src="../assets/logo.svg" alt="Logo" class="w-16 h-16 rounded-lg shadow-lg">
-      <div>
-        <p class="font-bold text-lg">@python-MeuSite Inc.</p>
-        <p class="text-sm text-gray-400">Rua Fictícia, 123 - São Paulo</p>
-      </div>
-    </div>
+<footer>
 
-    <!-- Contato -->
-    <div class="text-center md:text-left">
-      <p class="text-gray-300 text-sm">📞 (11) 98765-4321 | ✉️ contato@python-MeuSite.com</p>
-      <p class="text-gray-500 text-xs">ID: 12.345.678/0001-99</p>
-    </div>
-
-    <!-- Redes Sociais -->
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Facebook</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">Twitter</a>
-      <a href="#" class="hover:text-[var(--color-primary)] transition font-semibold">LinkedIn</a>
-    </div>
-  </div>
-
-  <div class="bg-[var(--color-secondary)] text-gray-400 text-xs text-center py-4">
-    &copy; 2025 @python-MeuSite Inc. Todos os direitos reservados.
-  </div>
 </footer>
+
 
 
 <!-- JS -->
 <script src="../js/config.js"></script>
 <script src="../js/main.js"></script>
-
-<style>
-  .input-field { 
-    padding: 0.5rem; border-radius: 0.75rem; background-color: var(--color-bg); color: var(--color-text); border: 1px solid #444; width: 100%;
-  }
-  .action-btn {
-    padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; 
-    background: linear-gradient(to right, #4ade80, #22c55e); 
-    color: white; transition: transform 0.2s; 
-  }
-  .action-btn:hover { transform: scale(1.05); }
-  .card-hover { transition: transform 0.2s; } 
-  .card-hover:hover { transform: scale(1.02); }
-</style>
 
 </body>
 </html>
