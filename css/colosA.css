@@ -2,12 +2,12 @@
    🎨 THEME ROOT VARIABLES
    ========================================================= */
 :root {
-  --color-primary: #7c4dff;
-  --color-primary-hover: #a17bff;
+  --color-primary: #ff83da;
+  --color-primary-hover: #ff9ee2;
   --color-secondary: #0f111a;
   --color-accent: #1c1f2a;
-  --color-bg: #1c1f2a;
-  --color-bg2: #7c4dff;
+  --color-bg: #ff83da;
+  --color-bg2: #ff9ee2;
   --color-text: #ffffff;
 
   --color-success: #22c55e;
