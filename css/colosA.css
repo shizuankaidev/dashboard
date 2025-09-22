@@ -2,28 +2,28 @@
    🎨 THEME ROOT VARIABLES
    ========================================================= */
 :root {
-  --color-primary: #ff66b2;          /* 💖 Rosa Hello Kitty */
-  --color-primary-hover: #ff85c1;    /* 💗 Rosa Highlight */
-  --color-secondary: #ffe6f0;        /* 🌑 Background claro */
-  --color-accent: #ffd1e8;           /* 🌑 Card / Panel Background */
-  --color-bg: #ffe6f0;               /* 🌌 Main Background */
-  --color-bg2: #ffcce6;              /* 🌙 Gradient Overlay */
-  --color-text: #2b1a2f;             /* ⚪ Texto escuro para contraste */
-  --color-text-background: #ff66b2;  /* 🌸 Textos em botões ou placeholders */
+  --color-primary: #1793d1;          /* 💙 Arch Blue */
+  --color-primary-hover: #1c7ed6;    /* 💠 Highlight Blue */
+  --color-secondary: #0a0d14;        /* 🖤 Dark Background */
+  --color-accent: #12161f;           /* 🌑 Card / Panel Background */
+  --color-bg: #0f111a;               /* 🖤 Main Background */
+  --color-bg2: #1b1f2b;              /* 🌌 Gradient Overlay */
+  --color-text: #e0e0e0;             /* ⚪ Light Gray Text */
 
   /* ✅ Semantic Colors */
-  --color-success: #ff99c2;          /* 🌿 Sucesso rosa claro */
-  --color-danger: #ff4d94;           /* 🔴 Alerta / Erro */
-  --color-warning: #ffd6e8;          /* ⚠️ Aviso suave */
-  --color-info: #d18eff;             /* ℹ️ Lilás fofo */
+  --color-success: #22c55e;          /* 🌿 Green */
+  --color-danger: #ef4444;           /* 🔴 Red */
+  --color-warning: #facc15;          /* ⚠️ Yellow */
+  --color-info: #1c7ed6;             /* ℹ️ Info Blue */
+  --color-text-Dackground: #b9b9b9;
 
   /* ✨ Glow / Shadows */
-  --glow-primary: #ff66b2aa;         /* Neon Pink Glow */
-  --glow-accent: #ffd1e8aa;          /* Subtle Accent Glow */
-  --glow-success: #ff99c2aa;
-  --glow-danger: #ff4d94aa;
-  --glow-warning: #ffd6e8aa;
-  --glow-info: #d18effaa;
+  --glow-primary: #1793d1aa;         /* Neon Blue Glow */
+  --glow-accent: #1c1f2aaa;          /* Subtle Accent Glow */
+  --glow-success: #22c55eaa;         /* Success Glow */
+  --glow-danger: #ef4444aa;          /* Danger Glow */
+  --glow-warning: #facc15aa;         /* Warning Glow */
+  --glow-info: #1c7ed6aa;            /* Info Glow */
 
   --border-radius: 1rem;
 
@@ -37,18 +37,9 @@
   --border-color: rgba(255,255,255,0.1);
   --border-focus: var(--color-primary-hover);
 
-  --shadow-unica: 0 0 12px var(--glow-primary), 0 5px 12px var(--glow-primary);
-
-
-  --shadow-card: 0 0 12px var(--glow-accent), 0 6px 15px var(--color-accent);
-  --shadow-card-hover: 0 0 20px var(--glow-primary), 0 10px 22px var(--color-secondary);
-  --shadow-button: 0 0 6px var(--glow-primary), 0 3px 10px var(--color-accent);
-  --shadow-button-hover: 0 0 18px var(--glow-primary), 0 6px 16px var(--color-secondary);
-  --shadow-input: 0 0 4px var(--glow-primary)/20;
-  --shadow-input-focus: 0 0 10px var(--glow-primary);
-  --shadow-modal: 0 0 18px var(--glow-primary), 0 10px 20px var(--color-accent);
-
-  --text-shadow: 0 0 4px var(--glow-primary), 0 0 8px var(--glow-primary);
+  --shadow-unica: 0 0 12px var(--glow-primary), 0 0px 0px 0px  var(--glow-primary);
+  --shadow-card: 0 0 12px var(--glow-accent), 0 0px 0px 0px var(--color-accent);
+ 
 
   --scrollbar-track: var(--color-secondary);
   --scrollbar-thumb: var(--color-primary-hover);
@@ -89,7 +80,7 @@ body {
   transition: all 0.3s ease;
 }
 .card-hover:hover {
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: var(--shadow-card);
   transform: translateY(-2px);
 }
 
@@ -102,13 +93,13 @@ button, .action-btn {
   border-radius: var(--border-radius);;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: var(--shadow-button);
+  box-shadow: var(--shadow-card);
   padding: 0.75rem 1rem;
   background: var(--bg-gradient-primary);
   color: var(--color-text);
 }
 button:hover, .action-btn:hover {
-  box-shadow: var(--shadow-button-hover);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 
@@ -122,14 +113,14 @@ input, select, textarea {
   border-radius: var(--border-radius);;
   padding: 0.75rem 1rem;
   outline: none;
-  box-shadow: var(--shadow-input);
+  box-shadow: var(--shadow-card);
   margin-bottom: 1rem;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 input:focus, select:focus, textarea:focus {
   border-color: var(--border-focus);
-  box-shadow: var(--shadow-input-focus);
+  box-shadow: var(--shadow-card-focus);
 }
 input::placeholder, textarea::placeholder { color: #aaa; opacity: 1; }
 
@@ -150,7 +141,7 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 50%;
   background: var(--color-primary);
   cursor: pointer;
-  box-shadow: var(--shadow-button);
+  box-shadow: var(--shadow-card);
   transition: all 0.3s;
 }
 input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.2); }
@@ -206,22 +197,22 @@ footer {
   background-color: var(--color-accent);
   color: var(--color-text);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-input);
+  box-shadow: var(--shadow-card);
   transition: all 0.3s ease;
 }
-.input-field:focus { border-color: var(--border-focus); box-shadow: var(--shadow-input-focus); }
+.input-field:focus { border-color: var(--border-focus); box-shadow: var(--shadow-card-focus); }
 
 .action-btn { 
   background: var(--bg-gradient-primary); 
   color: var(--color-text); 
   font-weight: 600; 
-  box-shadow: var(--shadow-button); 
+  box-shadow: var(--shadow-card); 
   border-radius: var(--border-radius);; 
   padding: 0.75rem 1rem; 
   transition: all 0.3s ease; 
 }
 .action-btn:hover { 
-  box-shadow: var(--shadow-button-hover); 
+  box-shadow: var(--shadow-card-hover); 
   transform: translateY(-2px); 
 }
 
@@ -380,7 +371,7 @@ header h2 {
 .popup-card {
   background: var(--bg-modal);
   border-radius: var(--border-radius);;
-  box-shadow: var(--shadow-modal);
+  box-shadow: var(--shadow-card);
   padding: 2rem;
   max-width: 400px;
   width: 90%;
@@ -390,11 +381,11 @@ header h2 {
 .popup-card button {
   margin-top: 1rem;
   background: var(--bg-gradient-primary);
-  box-shadow: var(--shadow-button);
+  box-shadow: var(--shadow-card);
   transition: all 0.3s ease;
 }
 .popup-card button:hover {
-  box-shadow: var(--shadow-button-hover);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 
@@ -409,7 +400,7 @@ header h2 {
   transition: all 0.3s ease;
 }
 .stat-box:hover {
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: var(--shadow-card);
   transform: translateY(-2px);
 }
 
@@ -427,11 +418,11 @@ header h2 {
   border-radius: 1rem;
   background: var(--bg-gradient-accent);
   color: var(--color-text);
-  box-shadow: var(--shadow-button);
+  box-shadow: var(--shadow-card);
 }
 .toolbar button:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-button-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* =========================================================
