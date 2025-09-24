@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <ul class="space-y-3">
           <li><a href="../index.html">📊 Dashboard</a></li>
           <li><a href="/pages/relatorios.html">📑 Relatórios</a></li>
-          <li><a href="/pages/analytics.html">📈 Analytics</a></li>
+          <li class=""><a href="/pages/analytics.html">📈 Analytics</a></li>
           <li><a href="/pages/funcionarios.html">👥 Usuários</a></li>
           <li><a href="/pages/config.html">⚙️ Configurações</a></li>
         </ul>
@@ -60,10 +60,25 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // Página ativa
-    const currentPage = window.location.pathname.split("/").pop().replace(".html", "").toLowerCase();
+    let currentPage = window.location.pathname.split("/").pop().replace(".html", "").toLowerCase();
+
+    // se não tiver nada no path (tipo quando a URL termina com "/"), forçar para "index"
+    if (currentPage === "" || currentPage === "index") {
+      currentPage = "index";
+    }
+    console.log(currentPage)
+
     sidebar.querySelectorAll("nav a").forEach(link => {
-      const linkPage = link.getAttribute("href").split("/").pop().replace(".html", "").toLowerCase();
-      link.classList.toggle("active", linkPage === currentPage);
+      let linkPage = link.getAttribute("href").split("/").pop().replace(".html", "").toLowerCase();
+
+      // Tratamento especial para o Dashboard
+      if (linkPage === "index" && currentPage === "index") {
+        link.classList.add("active");
+      } else if (linkPage === currentPage) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
     });
   }
 
@@ -75,6 +90,13 @@ window.addEventListener("DOMContentLoaded", () => {
     const userName = "Pedro Silva";
     const userEmail = "pedro.silva@email.com";
     const userInitials = userName.split(" ").map(n => n[0]).join("");
+
+    // Verifica se está na index ou em outra página
+    const currentPage = window.location.pathname.split("/").pop().replace(".html", "").toLowerCase();
+    const isIndex = (currentPage === "" || currentPage === "index");
+
+    // Define os caminhos corretos
+    const basePath = isIndex ? "pages/" : "../pages/";
 
     // Estrutura do menu
     const userMenuContainer = document.createElement("div");
@@ -88,12 +110,12 @@ window.addEventListener("DOMContentLoaded", () => {
       <div id="userDropdown" class="user-dropdown hidden absolute right-0 mt-2 w-48 bg-[var(--color-accent)] rounded-lg shadow-lg z-50">
         <div class="px-4 py-3 border-b border-gray-700">
           <p class="font-semibold text-[var(--color-text)]">${userName}</p>
-          <p class=text-[var(--color-text)] text-sm">${userEmail}</p>
+          <p class="text-[var(--color-text)] text-sm">${userEmail}</p>
         </div>
         <ul class="flex flex-col">
-          <li><a href="perfil.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">👤 Perfil</a></li>
-          <li><a href="pages/config.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">⚙️ Configurações</a></li>
-          <li><a href="pages/login.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">🚪 Sair</a></li>
+          <li><a href="${basePath}perfil.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">👤 Perfil</a></li>
+          <li><a href="${basePath}config.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">⚙️ Configurações</a></li>
+          <li><a href="${basePath}login.html" class="px-4 py-2 hover:bg-[var(--color-primary)] rounded">🚪 Sair</a></li>
         </ul>
       </div>
     `;

@@ -1,6 +1,15 @@
 // ==================== CONFIG ====================
 const API_URL = "http://localhost:8000/api"; // 🔧 Troque pelo endereço da sua API
 
+
+
+// ==================== MOCK DE RELATÓRIOS ====================
+const mockReports = [
+  { id: 1, nome: "Relatório Vendas", tipo: "Financeiro", data: "2025-09-21", status: "Concluído", tamanho: "2MB", conteudo: "Conteúdo do relatório 1" },
+  { id: 2, nome: "Relatório Estoque", tipo: "Logística", data: "2025-09-20", status: "Pendente", tamanho: "1.5MB", conteudo: "Conteúdo do relatório 2" },
+  { id: 3, nome: "Relatório Marketing", tipo: "Marketing", data: "2025-09-19", status: "Concluído", tamanho: "3MB", conteudo: "Conteúdo do relatório 3" },
+];
+
 // ==================== ELEMENTOS ====================
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
@@ -61,61 +70,8 @@ function logout() {
   window.location.href = "index.html";
 }
 
-// ==================== LOGIN ====================
-if (loginForm) {
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const username = document.getElementById("loginUsername").value;
-    const password = document.getElementById("loginPassword").value;
-    const { ok, data } = await apiRequest("/login", "POST", { username, password });
-    if (ok) {
-      saveToken(data.token);
-      alert("Login realizado com sucesso!");
-      window.location.href = "dashboard.html";
-    } else {
-      alert(data.detail || "Erro ao fazer login");
-    }
-  });
-}
 
-// ==================== REGISTRO ====================
-if (registerForm) {
-  registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const username = document.getElementById("regUsername").value;
-    const email = document.getElementById("regEmail").value;
-    const password = document.getElementById("regPassword").value;
-    const { ok, data } = await apiRequest("/register", "POST", { username, email, password });
-    if (ok) {
-      alert("Conta criada com sucesso! Faça login.");
-      registerForm.classList.add("hidden");
-      loginForm.classList.remove("hidden");
-    } else {
-      alert(data.detail || "Erro ao registrar");
-    }
-  });
-}
 
-// ==================== TROCA DE TELA ====================
-if (showRegister && showLogin) {
-  showRegister.addEventListener("click", () => {
-    loginForm.classList.add("hidden");
-    registerForm.classList.remove("hidden");
-    document.getElementById("formTitle").textContent = "Registrar";
-  });
-  showLogin.addEventListener("click", () => {
-    registerForm.classList.add("hidden");
-    loginForm.classList.remove("hidden");
-    document.getElementById("formTitle").textContent = "Login";
-  });
-}
-
-// ==================== MOCK DE RELATÓRIOS ====================
-const mockReports = [
-  { id: 1, nome: "Relatório Vendas", tipo: "Financeiro", data: "2025-09-21", status: "Concluído", tamanho: "2MB", conteudo: "Conteúdo do relatório 1" },
-  { id: 2, nome: "Relatório Estoque", tipo: "Logística", data: "2025-09-20", status: "Pendente", tamanho: "1.5MB", conteudo: "Conteúdo do relatório 2" },
-  { id: 3, nome: "Relatório Marketing", tipo: "Marketing", data: "2025-09-19", status: "Concluído", tamanho: "3MB", conteudo: "Conteúdo do relatório 3" },
-];
 
 // ==================== FUNÇÕES DE RELATÓRIO ====================
 function populateReportTable() {

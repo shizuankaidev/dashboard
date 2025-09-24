@@ -1,0 +1,464 @@
+
+/* =========================================================
+   BASE
+   ========================================================= */
+body {
+  background: var(--bg-main);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+.card-hover {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+button, .action-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-card);
+  padding: 0.75rem 1rem;
+  background: var(--bg-gradient-primary);
+  color: var(--color-text);
+}
+button:hover, .action-btn:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   INPUTS / SELECTS / TEXTAREA
+   ========================================================= */
+input, select, textarea {
+  background: var(--color-accent);
+  color: var(--color-text);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);;
+  padding: 0.75rem 1rem;
+  outline: none;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-card-focus);
+}
+input::placeholder, textarea::placeholder { color: #aaa; opacity: 1; }
+
+/* RANGE SLIDERS */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s;
+}
+input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.2); }
+
+/* =========================================================
+   CHECKBOXES / RADIOS
+   ========================================================= */
+input[type="checkbox"], input[type="radio"] {
+  accent-color: var(--color-primary);
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: var(--color-text);
+}
+table th, table td {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.75rem 1rem;
+}
+table th { background: var(--color-primary); }
+table tr:hover { background: rgba(124,77,255,0.1); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  text-align: center;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+   ========================================================= */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================================
+   GERAL / UTILIDADES
+   ========================================================= */
+.input-field {
+  width: 100%;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+.input-field:focus { border-color: var(--border-focus); box-shadow: var(--shadow-card-focus); }
+
+.action-btn { 
+  background: var(--bg-gradient-primary); 
+  color: var(--color-text); 
+  font-weight: 600; 
+  box-shadow: var(--shadow-card); 
+  border-radius: var(--border-radius);; 
+  padding: 0.75rem 1rem; 
+  transition: all 0.3s ease; 
+}
+.action-btn:hover { 
+  box-shadow: var(--shadow-card-hover); 
+  transform: translateY(-2px); 
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   HEADER FIXO
+   ========================================================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: var(--color-secondary);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header h2 {
+  color: var(--color-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+#sidebar {
+  background: var(--color-primary);
+  width: 16rem;
+  min-height: 100vh;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+  z-index: 998;
+}
+#sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+#sidebar nav ul li {
+  margin-bottom: 1rem;
+}
+#sidebar nav ul li a {
+  color: var(--color-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);;
+  transition: all 0.2s ease;
+}
+#sidebar nav ul li a.active,
+#sidebar nav ul li a:hover {
+  color: var(--color-text);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================================
+   DROPDOWNS / MENUS
+   ========================================================= */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: var(--color-accent);
+  min-width: 12rem;
+  box-shadow: var(--shadow-card);
+  border-radius: var(--border-radius);;
+  overflow: hidden;
+  z-index: 9999;
+  flex-direction: column;
+}
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+.dropdown-content a {
+  padding: 0.5rem 1rem;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.dropdown-content a:hover {
+  background: var(--bg-gradient-primary);
+}
+
+/* =========================================================
+   BADGES / LABELS
+   ========================================================= */
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+.badge-success { background: var(--color-success); color: #fff; }
+.badge-danger { background: var(--color-danger); color: #fff; }
+.badge-warning { background: var(--color-warning); color: #000; }
+.badge-info { background: var(--color-info); color: #fff; }
+
+/* =========================================================
+   TOOLTIP
+   ========================================================= */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent);
+  color: var(--color-text);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);;
+  white-space: nowrap;
+  box-shadow: var(--shadow-card);
+  font-size: 0.75rem;
+  opacity: 0.95;
+}
+
+/* =========================================================
+   MODALS / POPUPS
+   ========================================================= */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+.popup-card {
+  background: var(--bg-modal);
+  border-radius: var(--border-radius);;
+  box-shadow: var(--shadow-card);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+}
+.popup-card button {
+  margin-top: 1rem;
+  background: var(--bg-gradient-primary);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+.popup-card button:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   CARDS / STAT BOXES
+   ========================================================= */
+.stat-box {
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+.stat-box:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   TOOLBAR / FILTERS
+   ========================================================= */
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.toolbar button {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background: var(--bg-gradient-accent);
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+}
+.toolbar button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 1024px) {
+  #sidebar { transform: translateX(-100%); position: fixed; z-index: 999; }
+  #sidebar.show { transform: translateX(0); }
+}
+
+/* =========================================================
+   CUSTOM CHECKBOX
+   ========================================================= */
+/* =========================================================
+   CUSTOM CHECKBOX DIRETO NO INPUT
+   ========================================================= */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 0.4rem; /* pode trocar por var(--border-radius) se quiser global */
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--color-primary);
+  box-shadow: 0 0 8px var(--glow-primary);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* =========================================================
+   SECTION / CARDS UNIFICADOS
+   ========================================================= */ 
+  .section-cards > div,
+  .stat-box, 
+  .card-hover {
+    background: var(--color-secondary);          /* cor uniforme */
+    backdrop-filter: blur(12px);         /* blur consistente */
+    border-radius: var(--border-radius); 
+    box-shadow: var(--shadow-unica);     /* sombra única aplicada */
+    transition: all 0.3s ease;
+  }
+
+  .section-cards > div:hover,
+  .card-hover:hover,
+  .stat-box:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-unica);     /* mantém sombra única */
+  }
+
+.action-btn {
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 600;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 6px var(--glow-primary), 0 3px 10px var(--color-accent);
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 0 18px var(--glow-primary), 0 6px 16px var(--color-accent);
+}
+
+
+
+#deptChart, #salesChart {
+  max-width: 100%;
+  height: auto !important;
+}
+
+#deptChart {
+  max-height: 220px; /* controla o gráfico de pizza */
+}
