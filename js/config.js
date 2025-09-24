@@ -1,5 +1,4 @@
 // ======================= MOCK / API =======================
-// ======================= MOCK / API =======================
 async function fetchDashboardData() {
   try {
     await new Promise(res => setTimeout(res, 500));
